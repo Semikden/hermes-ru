@@ -1,5 +1,5 @@
 diff --git a/gateway/run.py b/gateway/run.py
-index 8fda2c1f..dbf71108 100644
+index 8fda2c1f..a714a170 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -597,7 +597,7 @@ def _format_gateway_process_notification(evt: dict) -> "str | None":
@@ -261,6 +261,15 @@ index 8fda2c1f..dbf71108 100644
          else:
              requested_page = 1
  
+@@ -5487,7 +5505,7 @@ class GatewayRunner:
+             skill_cmds = get_skill_commands()
+             if skill_cmds:
+                 entries.append("")
+-                entries.append("⚡ **Skill Commands**:")
++                entries.append("⚡ **Команды скиллов**:")
+                 for cmd in sorted(skill_cmds):
+                     desc = skill_cmds[cmd].get("description", "").strip() or "Skill command"
+                     entries.append(f"`{cmd}` — {desc}")
 @@ -5495,7 +5513,7 @@ class GatewayRunner:
              pass
  
@@ -270,6 +279,30 @@ index 8fda2c1f..dbf71108 100644
  
          from gateway.config import Platform
          page_size = 15 if event.source.platform == Platform.TELEGRAM else 20
+@@ -5505,19 +5523,19 @@ class GatewayRunner:
+         page_entries = entries[start:start + page_size]
+ 
+         lines = [
+-            f"📚 **Commands** ({len(entries)} total, page {page}/{total_pages})",
++            f"📚 **Команды** ({len(entries)}, страница {page}/{total_pages})",
+             "",
+             *page_entries,
+         ]
+         if total_pages > 1:
+             nav_parts = []
+             if page > 1:
+-                nav_parts.append(f"`/commands {page - 1}` ← prev")
++                nav_parts.append(f"`← prev` / `/commands {page - 1}`")
+             if page < total_pages:
+-                nav_parts.append(f"next → `/commands {page + 1}`")
++                nav_parts.append(f"`/commands {page + 1}` → next")
+             lines.extend(["", " | ".join(nav_parts)])
+         if page != requested_page:
+-            lines.append(f"_(Requested page {requested_page} was out of range, showing page {page}.)_")
++            lines.append(f"_(Запрошенная страница {requested_page} вне диапазона, показана страница {page}.)_")
+         return "\n".join(lines)
+     
+     async def _handle_model_command(self, event: MessageEvent) -> Optional[str]:
 @@ -5625,7 +5643,7 @@ class GatewayRunner:
                              custom_providers=custom_provs,
                          )
@@ -815,3 +848,95 @@ index 8fda2c1f..dbf71108 100644
              
              # Dedup: collapse consecutive identical progress messages.
              # Common with execute_code where models iterate with the same
+diff --git a/hermes_cli/commands.py b/hermes_cli/commands.py
+index 614d783d..0d6bd8b7 100644
+--- a/hermes_cli/commands.py
++++ b/hermes_cli/commands.py
+@@ -374,6 +374,77 @@ def _is_gateway_available(cmd: CommandDef, config_overrides: set[str] | None = N
+     return False
+ 
+ 
++# Russian translations for command descriptions (used by gateway_help_lines)
++_CMD_DESC_RU = {
++    "Start a new session (fresh session ID + history)": "Начать новую сессию (новый ID + история)",
++    "Clear screen and start a new session": "Очистить экран и начать новую сессию",
++    "Show conversation history": "Показать историю разговора",
++    "Save the current conversation": "Сохранить текущий разговор",
++    "Retry the last message (resend to agent)": "Повторить последнее сообщение (отправить агенту заново)",
++    "Remove the last user/assistant exchange": "Удалить последний обмен пользователь/ассистент",
++    "Set a title for the current session": "Установить заголовок текущей сессии",
++    "Branch the current session (explore a different path)": "Создать ветку сессии (исследовать другой путь)",
++    "Manually compress conversation context": "Вручную сжать контекст разговора",
++    "List or restore filesystem checkpoints": "Список или восстановление контрольных точек",
++    "Create or restore state snapshots of Hermes config/state": "Создать или восстановить снапшоты состояния Hermes",
++    "Kill all running background processes": "Остановить все фоновые процессы",
++    "Approve a pending dangerous command": "Одобрить ожидающую опасную команду",
++    "Deny a pending dangerous command": "Отклонить ожидающую опасную команду",
++    "Run a prompt in the background": "Выполнить промпт в фоне",
++    "Show active agents and running tasks": "Показать активных агентов и задачи",
++    "Queue a prompt for the next turn (doesn't interrupt)": "Поставить промпт в очередь на следующий ход (не прерывает)",
++    "Inject a message after the next tool call without interrupting": "Вставить сообщение после следующего вызова инструмента без прерывания",
++    "Show session info": "Показать информацию о сессии",
++    "Show active profile name and home directory": "Показать имя активного профиля и домашнюю директорию",
++    "Set this chat as the home channel": "Назначить этот чат домашним каналом",
++    "Resume a previously-named session": "Возобновить именованную сессию",
++    "Show current configuration": "Показать текущую конфигурацию",
++    "Switch model for this session": "Переключить модель для этой сессии",
++    "Show Google Gemini Code Assist quota usage": "Показать использование квоты Google Gemini Code Assist",
++    "Set a predefined personality": "Установить предопределённую личность",
++    "Toggle the context/model status bar": "Переключить строку статуса контекста/модели",
++    "Cycle tool progress display: off -> new -> all -> verbose": "Цикл отображения прогресса: выкл -> новое -> всё -> подробно",
++    "Toggle YOLO mode (skip all dangerous command approvals)": "Переключить YOLO-режим (пропустить все подтверждения опасных команд)",
++    "Manage reasoning effort and display": "Управление усилием и отображением рассуждений",
++    "Toggle fast mode — OpenAI Priority Processing / Anthropic Fast Mode (Normal/Fast)": "Переключить быстрый режим — OpenAI Priority Processing / Anthropic Fast Mode",
++    "Show or change the display skin/theme": "Показать или изменить тему оформления",
++    "Toggle voice mode": "Переключить голосовой режим",
++    "Control what Enter does while Hermes is working": "Управление поведением Enter во время работы Hermes",
++    "Manage tools: /tools [list|disable|enable] [name...]": "Управление инструментами: /tools [список|выкл|вкл] [имена...]",
++    "List available toolsets": "Список доступных наборов инструментов",
++    "Search, install, inspect, or manage skills": "Искать, устанавливать, просматривать скиллы",
++    "Manage scheduled tasks": "Управление запланированными задачами",
++    "Reload .env variables into the running session": "Перезагрузить переменные .env в текущую сессию",
++    "Reload MCP servers from config": "Перезагрузить MCP-серверы из конфига",
++    "Connect browser tools to your live Chrome via CDP": "Подключить браузерные инструменты к живому Chrome через CDP",
++    "List installed plugins and their status": "Список установленных плагинов и их статус",
++    "Browse all commands and skills (paginated)": "Список всех команд и скиллов (с страницами)",
++    "Show available commands": "Показать доступные команды",
++    "Gracefully restart the gateway after draining active runs": "Плавный рестарт шлюза после завершения активных запусков",
++    "Show token usage and rate limits for the current session": "Показать использование токенов и лимиты для текущей сессии",
++    "Show usage insights and analytics": "Показать инсайты использования и аналитику",
++    "Show gateway/messaging platform status": "Показать статус шлюза и платформ",
++    "Copy the last assistant response to clipboard": "Копировать последний ответ ассистента в буфер",
++    "Attach clipboard image from your clipboard": "Прикрепить изображение из буфера обмена",
++    "Attach a local image file for your next prompt": "Прикрепить локальный файл изображения для следующего промпта",
++    "Update Hermes Agent to the latest version": "Обновить Hermes Agent до последней версии",
++    "Upload debug report (system info + logs) and get shareable links": "Загрузить отчёт об отладке (система + логи) и получить ссылки",
++    "Exit the CLI": "Выйти из CLI",
++    "Browse and manage sessions": "Просмотр и управление сессиями",
++    "Show Hermes version info": "Показать информацию о версии Hermes",
++    "Toggle token usage tracking": "Переключить отслеживание использования токенов",
++    "Start interactive debugger (pdb)": "Запустить интерактивный отладчик (pdb)",
++    "Show current system prompt": "Показать текущий системный промпт",
++    "Reload all skill registries": "Перезагрузить все реестры скиллов",
++    "Toggle verbose tool output": "Переключить подробный вывод инструментов",
++    "Search and replace in session history": "Искать и заменять в истории сессии",
++    "Load a named System Prompt template": "Загрузить шаблон системного промпта",
++    "Manage Hermes plugins": "Управление плагинами Hermes",
++    "Run a quick command (alias expansions + env var interpolation)": "Выполнить быструю команду (раскрытие алиасов + интерполяция env)",
++    "Toggle auto-selection of default model": "Переключить автовыбор модели по умолчанию",
++}
++
++
+ def gateway_help_lines() -> list[str]:
+     """Generate gateway help text lines from the registry."""
+     overrides = _resolve_config_gates()
+@@ -389,7 +460,8 @@ def gateway_help_lines() -> list[str]:
+                 continue
+             alias_parts.append(f"`/{a}`")
+         alias_note = f" (alias: {', '.join(alias_parts)})" if alias_parts else ""
+-        lines.append(f"`/{cmd.name}{args}` -- {cmd.description}{alias_note}")
++        desc_ru = _CMD_DESC_RU.get(cmd.description, cmd.description)
++        lines.append(f"`/{cmd.name}{args}` -- {desc_ru}{alias_note}")
+     return lines
+ 
+ 
