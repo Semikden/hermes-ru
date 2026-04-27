@@ -1,149 +1,126 @@
 ---
 name: hermes-ru
-description: "Автоматизированная русификация Telegram-интерфейса Hermes Agent. Патчит run.py (100%, 82/82) + commands.py (~60 описаний команд). GitHub: Semikden/hermes-ru."
-version: 2.2
+description: "Автоматизированная русификация Telegram-интерфейса Hermes Agent. Патчит run.py (~120 строк) + commands.py (~60 описаний команд). GitHub: Semikden/hermes-ru."
+version: 2.3
 author: Denis (Hermes community)
 ---
 
 # Hermes RU — Автоматизированная русификация Telegram
 
-## Быстрый старт
+## Что переводится (категории)
 
-```bash
-cd /root/hermes-ru
-python3 translate_batch.py    # LLM-translate всех строк → translations.txt
-python3 apply_translations.py  # Применить переводы к run.py
+### 1. Progress-сообщения агента (progress_callback)
 ```
-
-## Что делает
-
-Патчит `gateway/run.py` в hermes-agent-src:
-- Системные сообщения (шлюз, сессии, ошибки)
-- Метки инструментов в Telegram (progress_callback)
-- Все user-facing строки на русский
-
-## Структура репозитория
-
+💻 терминал: "ls"
+📖 читаю: "config.yaml"
+🔍 ищу: "function_name"
+✏️ пишу: "output.json"
 ```
-hermes-ru/
-├── SKILL.md              ← этот файл
-├── ru.patch               ← патч для apply после git pull
-├── audit_ru.py            ← аудит непереведённых строк
-├── translate_batch.py    ← LLM batch translation (1 запрос на все строки!)
-├── apply_translations.py ← применение переводов к run.py
-├── translations.txt       ← результат LLM-перевода (82 записи)
-└── README.md              ← документация
+Файл: `gateway/run.py` — словарь `_RU` (~35 инструментов)
+
+### 2. Системные сообщения шлюза
 ```
-
-## Workflow — полный цикл
-
-### 1. Аудит (что осталось перевести)
-
-```bash
-python3 /root/hermes-ru/audit_ru.py
+◐ Сессия сброшена. История диалога очищена.
+♻️ Шлюз успешно перезапущен. Сессия продолжается.
+⏳ Завершаю N активных агент(ов) перед рестартом...
+📬 Домашний канал не задан...
 ```
+Файл: `gateway/run.py` (~15 строк)
 
-Показывает все непереведённые user-facing строки с номерами строк.
-
-### 2. Batch translation (один LLM-запрос)
-
-```bash
-cd /root/hermes-ru
-python3 translate_batch.py
+### 3. Описания команд /commands (~60 штук)
 ```
-
-Результат: `translations.txt` с переводами всех найденных строк.
-
-**Пропускает:**
-- Internal-only строки (`logger.`, `__dedup__`, `self._running_agents`)
-- Строки с переменными `{result.error_message}`, `{command}`, etc.
-- Уже русские строки
-
-### 3. Применение переводов
-
-```bash
-cd /root/hermes-ru
-python3 apply_translations.py
+/new — Начать новую сессию (новый ID + история)
+/retry — Повторить последнее сообщение (отправить агенту заново)
+/undo — Удалить последний обмен пользователь/ассистент
+/title — Установить заголовок текущей сессии
+/stop — Остановить все фоновые процессы
+/queue — Поставить промпт в очередь на следующий ход
+/approve — Одобрить ожидающую опасную команду
+/deny — Отклонить ожидающую опасную команду
 ```
+Файл: `hermes_cli/commands.py` — словарь `_CMD_DESC_RU`
 
-- Создаёт бекап `run.py.ru_backup`
-- Применяет переводы из `translations.txt`
-- Пропускает строки с переменными (нужна ручная обработка)
-
-### 4. Проверка
-
-```bash
-python3 -m py_compile /root/hermes-agent-src/gateway/run.py
-python3 /root/hermes-ru/audit_ru.py
+### 4. Команды скиллов (заголовок)
 ```
-
-### 5. Рестарт
-
-```bash
-hermes gateway restart
+📚 Команды (120, страница 1/8)
+⚡ Команды скиллов:
 ```
+Файл: `gateway/run.py` — `_handle_commands_command()`
 
-### 6. Коммит и пуш
-
-```bash
-cd /root/hermes-ru
-git add -A && git commit -m "🎉 batch: N переводов"
-git push
+### 5. Status-сообщения (очередь, итерации)
 ```
-
-## Обработка строк с переменными
-
-Строки типа `↩️ Undid {removed_count} message(s).\nRemoved: "{preview}"` — **НЕ переводятся автоматически** потому что `{ }` placeholder'ы нельзя безопасно заменить.
-
-Для них — ручной патч через `patch()`:
-
-```python
-patch(
-    mode="replace",
-    path="/root/hermes-agent-src/gateway/run.py",
-    old_string='return f"↩️ Undid {removed_count} message(s).\nRemoved: \\"{preview}\\""',
-    new_string='return f"↩️ Отменено {removed_count} сообщение(й).\nУдалено: \\"{preview}\\""'
-)
+⏳ В очереди на следующий ход (8 мин прошло, итерация 23/60).
+   Отвечу когда текущая задача завершится.
+⏳ Все ещё работаю... (5 мин — итерация 3/60, работает: terminal)
+⏳ Шлюз перезапускается — сейчас занят и не может принять новую работу.
 ```
+Файл: `gateway/run.py` — busy session ack + progress notifications
 
-Список строк с переменными (26 шт) — см. `audit_ru.py` вывод.
-
-## ⚠️ После git pull — восстановление
-
-```bash
-cd /root/hermes-agent-src
-git pull
-cd /root/hermes-ru && python3 apply_translations.py
-hermes gateway restart
+### 6. Подтверждения/отклонения команд
 ```
-
-Или через hook (опционально):
-
-```bash
-cat > /root/hermes-agent-src/.git/hooks/post-merge << 'EOF'
-#!/bin/bash
-PATCH="/root/hermes-ru/ru.patch"
-TARGET="/root/hermes-agent-src/gateway/run.py"
-if [ -f "$PATCH" ]; then
-  cd /root/hermes-agent-src
-  git apply --ignore-whitespace "$PATCH" 2>/dev/null
-  if grep -q "Остановлено" "$TARGET" 2>/dev/null; then
-    echo "[hermes-ru] ✅ Русификация восстановлена"
-  fi
-fi
-EOF
-chmod +x /root/hermes-agent-src/.git/hooks/post-merge
+✅ Команда одобрена. Агент продолжает...
+❌ Команда отклонена.
 ```
+Файл: `gateway/run.py`
 
-## Регенерация патча
+### 7. Диагностика (timeout, stuck agent)
+```
+Агент похоже завис на инструменте terminal (45с с последней активности,
+итерация 5/90). Возможно агент ждал ответ от API.
+```
+Файл: `gateway/run.py` — `_handle_debug_command()`
 
-После изменений — обнови ru.patch:
+### 8. Управление рассуждениями (reasoning)
+```
+🧠 ✓ Усилие рассуждений установлено на low (сохранено в конфигурации)
+🧠 ✓ Отображение рассуждений: ВЫКЛ для telegram
+```
+Файл: `gateway/run.py`
 
-```bash
-cd /root/hermes-agent-src
-git diff -- gateway/run.py > /root/hermes-ru/ru.patch
+### 9. Приоритетная обработка (fast/priority)
+```
+⚡ ✓ Приоритетная обработка: auto (сохранено в конфигурации)
+```
+Файл: `gateway/run.py`
+
+### 10. Сессии (resume, title, branch)
+```
+↻ Сессия "Проект" восстановлена (12 сообщений). Диалог возобновлён.
+✏️ Заголовок сессии установлен: Мой проект
+📌 Уже в сессии "Проект".
+```
+Файл: `gateway/run.py`
+
+---
+
+## Не переводится (3 строки — чистые переменные)
+
+Эти строки не содержат текста для перевода, только `{}` placeholder'ы:
+```
+f"{platform.value}:{chat_id}"         — идентификатор сессии
+f"{header}\n\n{session_info}{_tip_line}" — шаблон с динамическим контентом
+f"❌ {result['error']}"               — уже с русским эмодзи
 ```
 
 ---
 
-*Обновлено 27.04.2026 — v2.0 (automated batch translation workflow)*
+## Файлы
+
+| Файл | Что патчится | Строк перевода |
+|------|-------------|----------------|
+| `gateway/run.py` | progress_callback, системные сообщения, статусы, approvals, diagnostics | ~120 |
+| `hermes_cli/commands.py` | описания команд (~60 шт) + helper функция | ~60 |
+
+## Workflow
+
+```bash
+cd /root/hermes-ru
+python3 translate_batch.py              # LLM-translate всех строк
+python3 apply_translations.py           # Применить переводы к run.py
+python3 -m py_compile run.py           # Проверка синтаксиса
+hermes gateway restart
+```
+
+---
+
+*Обновлено 27.04.2026 — v2.3 (добавлена диагностика + status-сообщения)*
