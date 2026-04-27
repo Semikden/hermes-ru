@@ -1,0 +1,504 @@
+# Hermes Telegram RU — Batch Translation Patch
+# Generated from 82 translations
+
+# Apply with: git apply < ru_batch.patch
+
+--- a/run.py
++++ b/run.py
+@3416@
+-                return "⚡ Stopped. You can continue this session."
++⚡ Остановлено. Можешь продолжить эту сессию.
+
+--- a/run.py
++++ b/run.py
+@3441@
+-                    return "Usage: /queue <prompt>"
++Использование: /queue <текст>
+
+--- a/run.py
++++ b/run.py
+@3462@
+-                    return "Usage: /steer <prompt>"
++Использование: /steer <текст>
+
+--- a/run.py
++++ b/run.py
+@3476@
+-                    return "Agent still starting — /steer queued for the next turn."
++Агент все еще запускается — /steer в очереди на следующий ход.
+
+--- a/run.py
++++ b/run.py
+@3486@
+-                    return "Steer rejected (empty payload)."
++Управление отклонено (пустая нагрузка).
+
+--- a/run.py
++++ b/run.py
+@3498@
+-                return "No active agent — /steer queued for the next turn."
++Нет активного агента — /steer в очереди на следующий ход.
+
+--- a/run.py
++++ b/run.py
+@3502@
+-                return "Agent is running — wait or /stop first, then switch models."
++Агент работает — подожди или сначала /stop, затем переключи модели.
+
+--- a/run.py
++++ b/run.py
+@3605@
+-                    return "⚡ Force-stopped. The agent was still starting — session unlocked."
++⚡ Принудительно остановлено. Агент все еще запускался — сессия разблокирована.
+
+--- a/run.py
++++ b/run.py
+@3689@
+-                    return f"Command `/{command}` was blocked by a hook."
++Команда `/{command}` была заблокирована хуком.
+
+--- a/run.py
++++ b/run.py
+@3802@
+-                return "Usage: /steer <prompt>  (no agent is running; sending as a normal message)"
++Использование: /steer <текст>  (агент не работает; отправка как обычное сообщение)
+
+--- a/run.py
++++ b/run.py
+@3840@
+-                            return "Quick command timed out (30s)."
++Время выполнения быстрой команды истекло (30 секунд).
+
+--- a/run.py
++++ b/run.py
+@3842@
+-                            return f"Quick command error: {e}"
++Ошибка быстрой команды: {e}
+
+--- a/run.py
++++ b/run.py
+@3844@
+-                        return f"Quick command '/{command}' has no command defined."
++Быстрая команда '/{command}' не имеет определенной команды.
+
+--- a/run.py
++++ b/run.py
+@3855@
+-                        return f"Quick command '/{command}' has no target defined."
++Быстрая команда '/{command}' не имеет определенной цели.
+
+--- a/run.py
++++ b/run.py
+@3857@
+-                    return f"Quick command '/{command}' has unsupported type (supported: 'exec', 'alias')."
++Быстрая команда '/{command}' имеет неподдерживаемый тип (поддерживаемые: 'exec', 'alias').
+
+--- a/run.py
++++ b/run.py
+@5326@
+-            return "⚡ Stopped. The agent hadn't started yet — you can continue this session."
++⚡ Остановлено. Агент еще не запустился — ты можешь продолжить эту сессию.
+
+--- a/run.py
++++ b/run.py
+@5336@
+-            return "⚡ Stopped. You can continue this session."
++⚡ Остановлено. Можешь продолжить эту сессию.
+
+--- a/run.py
++++ b/run.py
+@5338@
+-            return "No active task to stop."
++Нет активной задачи для остановки.
+
+--- a/run.py
++++ b/run.py
+@5497@
+-                return "Usage: `/commands [page]`"
++Использование: `/commands [страница]`
+
+--- a/run.py
++++ b/run.py
+@5516@
+-            return "No commands available."
++Нет доступных команд.
+
+--- a/run.py
++++ b/run.py
+@5646@
+-                            return f"Error: {result.error_message}"
++Ошибка: {result.error_message}
+
+--- a/run.py
++++ b/run.py
+@5770@
+-            return f"Error: {result.error_message}"
++Ошибка: {result.error_message}
+
+--- a/run.py
++++ b/run.py
+@5931@
+-            return "🎭 Personality cleared — using base agent behavior.\n_(takes effect on next message)_"
++🎭 Личность очищена — используется базовое поведение агента.
+_(вступает в силу с следующего сообщения)_
+
+--- a/run.py
++++ b/run.py
+@5947@
+-            return f"🎭 Personality set to **{args}**\n_(takes effect on next message)_"
++🎭 Личность установлена на **{args}**
+_(вступает в силу с следующего сообщения)_
+
+--- a/run.py
++++ b/run.py
+@5968@
+-            return "No previous message to retry."
++Нет предыдущего сообщения для повторной попытки.
+
+--- a/run.py
++++ b/run.py
+@6002@
+-            return "Nothing to undo."
++Нечего отменять.
+
+--- a/run.py
++++ b/run.py
+@6011@
+-        return f"↩️ Undid {removed_count} message(s).\nRemoved: \"{preview}\""
++↩️ Отменено {removed_count} сообщение(й).
+Удалено: "{preview}"
+
+--- a/run.py
++++ b/run.py
+@6080@
+-            return "Voice mode disabled. Text-only replies."
++Голосовой режим отключен. Ответы только текстом.
+
+--- a/run.py
++++ b/run.py
+@6125@
+-                return "Voice mode enabled."
++Голосовой режим включен.
+
+--- a/run.py
++++ b/run.py
+@6131@
+-                return "Voice mode disabled."
++Голосовой режим отключен.
+
+--- a/run.py
++++ b/run.py
+@6137@
+-            return "Voice channels are not supported on this platform."
++Голосовые каналы не поддерживаются на этой платформе.
+
+--- a/run.py
++++ b/run.py
+@6141@
+-            return "This command only works in a Discord server."
++Эта команда работает только на сервере Discord.
+
+--- a/run.py
++++ b/run.py
+@6147@
+-            return "You need to be in a voice channel first."
++Сначала нужно быть в голосовом канале.
+
+--- a/run.py
++++ b/run.py
+@6182@
+-        return "Failed to join voice channel. Check bot permissions (Connect + Speak)."
++Не удалось присоединиться к голосовому каналу. Проверьте разрешения бота (Подключение + Говорить).
+
+--- a/run.py
++++ b/run.py
+@6190@
+-            return "Not in a voice channel."
++Не в голосовом канале.
+
+--- a/run.py
++++ b/run.py
+@6193@
+-            return "Not in a voice channel."
++Не в голосовом канале.
+
+--- a/run.py
++++ b/run.py
+@6205@
+-        return "Left voice channel."
++Покинул голосовой канал.
+
+--- a/run.py
++++ b/run.py
+@6521@
+-        return f"❌ {result['error']}"
++❌ {result['error']}
+
+--- a/run.py
++++ b/run.py
+@6769@
+-            return f"🧠 ✓ Reasoning display: **OFF** for **{platform_key}**"
++🧠 ✓ Отображение рассуждений: **ВЫКЛ** для **{platform_key}**.
+_(вступает в силу с следующего сообщения)_
+
+--- a/run.py
++++ b/run.py
+@6775@
+-                return "⚠️ `/reasoning reset --global` is not supported. Use `/reasoning <level> --global` to change the global default."
++⚠️ `/reasoning reset --global` не поддерживается. Используйте `/reasoning <уровень> --global` вместо этого.
+
+--- a/run.py
++++ b/run.py
+@6779@
+-            return "🧠 ✓ Session reasoning override cleared; falling back to global config."
++🧠 ✓ Переопределение рассуждений сессии очищено; возвращение к глобальной конфигурации.
+
+--- a/run.py
++++ b/run.py
+@6797@
+-                return f"🧠 ✓ Reasoning effort set to `{effort}` (saved to config)\n_(takes effect on next message)_"
++🧠 ✓ Усилие рассуждений установлено на `{effort}` (сохранено в конфигурации)
+_(вступает в силу с следующего сообщения)_
+
+--- a/run.py
++++ b/run.py
+@6800@
+-            return f"🧠 ✓ Reasoning effort set to `{effort}` (session only — config save failed)\n_(takes effect on next message)_"
++🧠 ✓ Усилие рассуждений установлено на `{effort}` (только сессия — сохранение конфигурации не удалось)
+
+--- a/run.py
++++ b/run.py
+@6804@
+-        return f"🧠 ✓ Reasoning effort set to `{effort}` (session only — add `--global` to persist)\n_(takes effect on next message)_"
++🧠 ✓ Усилие рассуждений установлено на `{effort}` (только сессия — добавьте `--global`, чтобы сохранить)
+
+--- a/run.py
++++ b/run.py
+@6818@
+-            return "⚡ /fast is only available for OpenAI models that support Priority Processing."
++⚡ /fast доступна только для моделей OpenAI, которые поддерживают приоритетную обработку.
+
+--- a/run.py
++++ b/run.py
+@6863@
+-            return f"⚡ ✓ Priority Processing: **{label}** (saved to config)\n_(takes effect on next message)_"
++⚡ ✓ Приоритетная обработка: **{label}** (сохранено в конфигурации)
+_(вступает в силу с следующего сообщения)_
+
+--- a/run.py
++++ b/run.py
+@6864@
+-        return f"⚡ ✓ Priority Processing: **{label}** (this session only)"
++⚡ ✓ Приоритетная обработка: **{label}** (только для этой сессии)
+
+--- a/run.py
++++ b/run.py
+@6878@
+-            return "⚠️ YOLO mode **OFF** for this session — dangerous commands will require approval."
++⚠️ Режим YOLO **ВЫКЛ** для этой сессии — опасные команды потребуют одобрения.
+
+--- a/run.py
++++ b/run.py
+@6881@
+-            return "⚡ YOLO mode **ON** for this session — all commands auto-approved. Use with caution."
++⚡ Режим YOLO **ВКЛ** для этой сессии — все команды автоматически одобрены. Используйте с осторожностью.
+
+--- a/run.py
++++ b/run.py
+@6962@
+-            return "Not enough conversation to compress (need at least 4 messages)."
++Недостаточно разговора для сжатия (нужно как минимум 4 сообщения).
+
+--- a/run.py
++++ b/run.py
+@6978@
+-                return "No provider configured -- cannot compress."
++Поставщик не настроен — не могу сжать.
+
+--- a/run.py
++++ b/run.py
+@7002@
+-                    return "Nothing to compress yet (the transcript is still all protected context)."
++Нечего сжимать пока (транскрипция все еще защищена).
+
+--- a/run.py
++++ b/run.py
+@7051@
+-            return "Session database not available."
++База данных сессий недоступна.
+
+--- a/run.py
++++ b/run.py
+@7075@
+-                return "⚠️ Title is empty after cleanup. Please use printable characters."
++⚠️ Заголовок пуст после очистки. Пожалуйста, используйте печатные символы.
+
+--- a/run.py
++++ b/run.py
+@7079@
+-                    return f"✏️ Session title set: **{sanitized}**"
++✏️ Заголовок сессии установлен: **{sanitized}**
+
+--- a/run.py
++++ b/run.py
+@7081@
+-                    return "Session not found in database."
++Сессия не найдена в базе данных.
+
+--- a/run.py
++++ b/run.py
+@7088@
+-                return f"📌 Session: `{session_id}`\nTitle: **{title}**"
++📌 Сессия: `{session_id}`
+Заголовок: **{title}**
+
+--- a/run.py
++++ b/run.py
+@7090@
+-                return f"📌 Session: `{session_id}`\nNo title set. Usage: `/title My Session Name`"
++📌 Сессия: `{session_id}`
+Заголовок не установлен. Использование: `/title My Session Name`
+
+--- a/run.py
++++ b/run.py
+@7095@
+-            return "Session database not available."
++База данных сессий недоступна.
+
+--- a/run.py
++++ b/run.py
+@7125@
+-                return f"Could not list sessions: {e}"
++Не удалось перечислить сессии: {e}
+
+--- a/run.py
++++ b/run.py
+@7144@
+-            return f"📌 Already on session **{name}**."
++📌 Уже на сессии **{name}**.
+
+--- a/run.py
++++ b/run.py
+@7152@
+-            return "Failed to switch session."
++Не удалось переключить сессию.
+
+--- a/run.py
++++ b/run.py
+@7163@
+-        return f"↻ Resumed session **{title}**{msg_part}. Conversation restored."
++↻ Возобновлена сессия **{title}**{msg_part}. Разговор восстановлен.
+
+--- a/run.py
++++ b/run.py
+@7175@
+-            return "Session database not available."
++База данных сессий недоступна.
+
+--- a/run.py
++++ b/run.py
+@7184@
+-            return "No conversation to branch — send a message first."
++Нет разговора для ветвления — сначала отправьте сообщение.
+
+--- a/run.py
++++ b/run.py
+@7242@
+-            return "Branch created but failed to switch to it."
++Ветка создана, но не удалось переключиться на нее.
+
+--- a/run.py
++++ b/run.py
+@7392@
+-        return "No usage data available for this session."
++Нет данных о использовании для этой сессии.
+
+--- a/run.py
++++ b/run.py
+@7441@
+-            return f"Error generating insights: {e}"
++Ошибка при генерации инсайтов: {e}
+
+--- a/run.py
++++ b/run.py
+@7546@
+-                return "⚠️ Approval expired (agent is no longer waiting). Ask the agent to try again."
++⚠️ Одобрение истекло (агент больше не ждет). Попросите агента попробовать снова.
+
+--- a/run.py
++++ b/run.py
+@7547@
+-            return "No pending command to approve."
++Нет ожидающей команды для одобрения.
+
+--- a/run.py
++++ b/run.py
+@7566@
+-            return "No pending command to approve."
++Нет ожидающей команды для одобрения.
+
+--- a/run.py
++++ b/run.py
+@7575@
+-        return f"✅ Command{'s' if count > 1 else ''} approved{scope_msg}{count_msg}. The agent is resuming..."
++✅ Команда{'s' if count > 1 else ''} одобрена{scope_msg}{count_msg}. Агент продолжает...
+
+--- a/run.py
++++ b/run.py
+@7595@
+-                return "❌ Command denied (approval was stale)."
++❌ Команда отклонена (одобрение устарело).
+
+--- a/run.py
++++ b/run.py
+@7596@
+-            return "No pending command to deny."
++Нет ожидающей команды для отклонения.
+
+--- a/run.py
++++ b/run.py
+@7603@
+-            return "No pending command to deny."
++Нет ожидающей команды для отклонения.
+
+--- a/run.py
++++ b/run.py
+@7612@
+-        return f"❌ Command{'s' if count > 1 else ''} denied{count_msg}."
++❌ Команда{'s' if count > 1 else ''} отклонена{count_msg}.
+
+--- a/run.py
++++ b/run.py
+@7684@
+-            return "✗ /update is only available from messaging platforms. Run `hermes update` from the terminal."
++✗ /update доступна только из мессенджеров. Запустите `hermes update` из терминала.
+
+--- a/run.py
++++ b/run.py
+@7687@
+-            return f"✗ {format_managed_message('update Hermes Agent')}"
++✗ {format_managed_message('обновить агента Hermes')}
+
+--- a/run.py
++++ b/run.py
+@7693@
+-            return "✗ Not a git repository — cannot update."
++✗ Не репозиторий git — не могу обновить.
+
+--- a/run.py
++++ b/run.py
+@7758@
+-        return "⚕ Starting Hermes update… I'll stream progress here."
++⚕ Запуск обновления Hermes… Я буду транслировать прогресс здесь.
+
+--- a/run.py
++++ b/run.py
+@7877@
+-                        await adapter.send(chat_id, "✅ Hermes update finished.")
++✅ Обновление Hermes завершено.
+
+--- a/run.py
++++ b/run.py
+@7960@
+-                await adapter.send(chat_id, "❌ Hermes update timed out after 30 minutes.")
++❌ Обновление Hermes истекло через 30 минут.

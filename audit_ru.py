@@ -1,172 +1,165 @@
 #!/usr/bin/env python3
 """
-Hermes Telegram RU — Audit Script
-Находит все English строки в gateway/run.py которые отправляются в чат (Telegram и др. платформы).
-НЕ затрагивает CLI-строки.
+Hermes Telegram RU — Audit Script v2
+Находит ТОЛЬКО user-facing English строки в gateway/run.py.
+Игнорирует: internal return values, logger calls, config values.
 
 Использование:
     python3 audit_ru.py
-
-Вывод: список непереведённых строк с номерами строк.
 """
 
 import re
-import sys
 from pathlib import Path
 
-# Путь к run.py
 RUN_PY = Path.home() / ".hermes" / "hermes-agent" / "gateway" / "run.py"
-
-# Альтернативный путь (если hermes-agent установлен через pip)
 ALT_PATHS = [
     Path("/root/hermes-agent-src/gateway/run.py"),
     Path.home() / "hermes-agent-src" / "gateway" / "run.py",
 ]
 
-def find_run_py():
-    if RUN_PY.exists():
-        return RUN_PY
-    for p in ALT_PATHS:
-        if p.exists():
-            return p
-    return None
+INTERNAL_PATTERNS = [
+    r'return\s+"?(restart|shutdown|priority|queue|ignore|pair)',
+    r'return\s+f?"(restart|shutdown|priority|queue|ignore|pair)',
+    r'logger\.',
+    r'__dedup__',
+    r'_quick_key',
+    r'_pending_messages\[',
+    r'\.title\(\)',
+    r'platform_env_map',
+    r'service_tier',
+    r'allowlist',
+    r'env_key',
+    r'Platform\.',
+    r'os\.getenv',
+]
 
-def audit_telegram_strings(filepath: Path) -> list:
-    """Находит English строки отправляемые в адаптеры (chat-платформы)."""
-    
+INTERNAL_KEYWORDS = [
+    "restart", "shutdown", "priority", "queue", "ignore", "pair",
+    "_quick_key", "_pending_messages", "platform_env_map", "allowlist",
+    "service_tier", "raw.lower()", "raw.strip()"
+]
+
+
+def is_internal(line_num: int, text: str, line: str) -> bool:
+    """Определяет internal это строка или user-facing."""
+
+    # Пропускаем явно internal паттерны
+    for pattern in INTERNAL_PATTERNS:
+        if re.search(pattern, line):
+            return True
+
+    # Пропускаем если это return в internal функции
+    if 'return "' in line and ('_action_label' in line or '_action_gerund' in line):
+        return True
+
+    # Пропускаем очень короткие возвраты
+    if re.match(r'^\s*return "[a-z_]+"$', line.strip()):
+        return True
+
+    # Пропускаем logger calls
+    if 'logger.' in line:
+        return True
+
+    # Пропускаем tuple (queue internal message type)
+    if '__dedup__' in text:
+        return True
+
+    return False
+
+
+def get_user_facing_strings(filepath: Path) -> list:
+    """Находит user-facing строки."""
     content = filepath.read_text()
     lines = content.split('\n')
-    
+
     results = []
-    
-    # Паттерны для поиска:
-    # 1. adapter.send(chat_id, "English string")
-    # 2. f"English string" с emoji prefix (⏳, ⚡, 📬, ♻ и т.д.)
-    # 3. return "English string" если это response для чата
-    
-    # Игнорируемые паттерны (CLI):
-    # - logger.info/warning/error (это логи)
-    # - skin_emojis, skin_engine
-    # - CLI help text
-    
-    # Паттерны для поиска English строк в adapter.send и return
-    patterns = [
-        # adapter.send(..., "English", ...)
-        (r'await adapter\.send\([^)]*"([A-Z][^"]+)"', 'adapter.send'),
-        # return "English"  (но не logger. и не CLI)
-        (r'return ("[◐⏳⚡📬♻][^"]*")', 'return'),
-        # progress_queue.put("English")
-        (r'progress_queue\.put\("([^"]+)"\)', 'progress_queue'),
-        # f"English" после emoji prefix в Telegram context
-        (r'(["\'])([A-Z][a-z].*?)\1(?=\s*[,\)])', 'inline'),
-    ]
-    
-    # Более точный подход: ищем все строки с английскими словами в конце
-    # которые отправляются в чат
-    
-    chat_strings = []
-    
+
     for i, line in enumerate(lines, 1):
-        # Пропускаем комментарии
         if re.match(r'^\s*#', line):
             continue
-        
-        # Пропускаем logger.* — это CLI/логи
-        if re.search(r'logger\.(info|warning|error|debug)', line):
+
+        # Только строки с adapter.send, progress_queue.put( когда это строка
+        is_chat_context = ('adapter.send' in line or
+                          'progress_queue.put' in line or
+                          'return f"' in line or
+                          'return "' in line)
+
+        if not is_chat_context:
             continue
-        
-        # Пропускаем CLI help
-        if 'slash command' in line.lower() or 'usage:' in line.lower():
-            continue
-        
-        # Ищем adapter.send и progress_queue.put
-        if 'adapter.send' in line or 'progress_queue.put' in line:
-            # Извлекаем строки в кавычках
-            strings = re.findall(r'"([^"]+)"', line)
-            for s in strings:
-                # Фильтруем: пропускаем переменные, пути, технический текст
-                s_stripped = s.strip()
-                if not s_stripped:
-                    continue
-                # Пропускаем если уже есть русские буквы
-                if any('\u0400' <= c <= '\u04FF' for c in s_stripped):
-                    continue
-                # Пропускаем технические строки (содержат переменные, пути и т.д.)
-                if re.search(r'[{}%$]', s_stripped):
-                    continue
-                # Пропускаем очень короткие строки
-                if len(s_stripped) < 5:
-                    continue
-                # Пропускаем строки с file path
-                if '/' in s_stripped and ('.' in s_stripped):
-                    continue
-                chat_strings.append((i, s_stripped))
-    
-    # Также ищем return с русскими emoji но English текстом
-    for i, line in enumerate(lines, 1):
-        if 'return' not in line:
-            continue
-        if re.search(r'logger', line):
-            continue
-        
-        # Ищем return f"..." или return "..."
-        matches = re.findall(r'return [f]?"([^"]+)"', line)
-        for m in matches:
-            m_stripped = m.strip()
-            if not m_stripped:
+
+        # Извлекаем строки в кавычках
+        strings = re.findall(r'"([^"]+)"', line)
+        for s in strings:
+            s_stripped = s.strip()
+            if not s_stripped:
                 continue
-            # Если есть русские буквы — ок
-            if any('\u0400' <= c <= '\u04FF' for c in m_stripped):
+
+            # Уже русский?
+            if any('\u0400' <= c <= '\u04FF' for c in s_stripped):
                 continue
-            # Содержит переменные
-            if '{' in m_stripped and '}' in m_stripped:
+
+            # Содержит переменные { }
+            if '{' in s_stripped and '}' in s_stripped:
+                # Это может быть user-facing если содержит понятные слова
+                # Пропускаем чисто technical
+                if any(kw in s_stripped.lower() for kw in ['chat_id', 'platform', 'session', 'error', 'message', 'command']):
+                    pass  # Может быть user-facing
+                else:
+                    continue
+
+            # Слишком короткие
+            if len(s_stripped) < 3:
                 continue
-            if len(m_stripped) < 5:
+
+            # Проверяем internal
+            if is_internal(i, s_stripped, line):
                 continue
-            # English строка в return
-            chat_strings.append((i, m_stripped))
-    
-    # Уникальные результаты
+
+            results.append((i, s_stripped, line.strip()[:80]))
+
+    # Дедупликация
     seen = set()
     unique = []
-    for line_num, text in chat_strings:
+    for line_num, text, context in results:
         key = (line_num, text)
         if key not in seen:
             seen.add(key)
-            unique.append((line_num, text))
-    
+            unique.append((line_num, text, context))
+
     return sorted(unique, key=lambda x: x[0])
 
 
 def main():
-    filepath = find_run_py()
-    
+    filepath = RUN_PY if RUN_PY.exists() else None
+    if not filepath:
+        for p in ALT_PATHS:
+            if p.exists():
+                filepath = p
+                break
+
     if not filepath:
         print("❌ run.py не найден!")
-        print("   Ожидаемые пути:")
-        print(f"   - {RUN_PY}")
-        for p in ALT_PATHS:
-            print(f"   - {p}")
         sys.exit(1)
-    
-    print(f"🔍 Аудит: {filepath}")
-    print("=" * 60)
-    
-    results = audit_telegram_strings(filepath)
-    
+
+    print(f"🔍 Аудит: {filepath}\n")
+
+    results = get_user_facing_strings(filepath)
+
     if not results:
-        print("✅ Все строки переведены!")
+        print("✅ Все user-facing строки переведены!")
         return
-    
-    print(f"❌ Найдено {len(results)} непереведённых строк:\n")
-    
-    for line_num, text in results:
-        print(f"  Строка {line_num}: {text[:80]}{'...' if len(text) > 80 else ''}")
-    
-    print("\n" + "=" * 60)
-    print("Для перевода — добавь в словарь _RU в progress_callback")
-    print("или патчи соответствующие строки в run.py")
+
+    print(f"❌ Найдено {len(results)} непереведённых user-facing строк:\n")
+    print(f"{'Строка':<8} {'Текст':<55} {'Контекст'}")
+    print("-" * 90)
+
+    for line_num, text, context in results:
+        preview = text[:50] + ('...' if len(text) > 50 else '')
+        print(f"{line_num:<8} {preview:<55} {context}")
+
+    print(f"\n📝 Всего: {len(results)} строк")
 
 
 if __name__ == "__main__":
+    import sys
     main()
