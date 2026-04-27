@@ -1,213 +1,149 @@
 ---
 name: hermes-ru
-description: "Русификация Telegram-интерфейса Hermes Agent. Патчит gateway/run.py — системные сообщения, статусы инструментов (browser sub-tools включены), описания скиллов, обработчики команд. GitHub repo: Semikden/hermes-ru. Прогресс: ~95%."
-version: 1.1.0
+description: "Автоматизированная русификация Telegram-интерфейса Hermes Agent через LLM batch translation. Патчит gateway/run.py — системные сообщения, статусы инструментов, user-facing строки. GitHub: Semikden/hermes-ru. Прогресс: 56/82 строки переведены (остаток — строки с переменными)."
+version: 2.0
 author: Denis (Hermes community)
 ---
 
-# Hermes RU — Русификация Telegram-интерфейса
+# Hermes RU — Автоматизированная русификация Telegram
 
-## Что делает этот скилл
+## Быстрый старт
+
+```bash
+cd /root/hermes-ru
+python3 translate_batch.py    # LLM-translate всех строк → translations.txt
+python3 apply_translations.py  # Применить переводы к run.py
+```
+
+## Что делает
 
 Патчит `gateway/run.py` в hermes-agent-src:
 - Системные сообщения (шлюз, сессии, ошибки)
-- Метки инструментов в Telegram (progress_callback) — ВСЕ browser sub-tools включены
+- Метки инструментов в Telegram (progress_callback)
 - Все user-facing строки на русский
 
-А ТАКЖЕ переводит `description` всех скиллов на русский язык.
+## Структура репозитория
 
-## Совместимость
+```
+hermes-ru/
+├── SKILL.md              ← этот файл
+├── ru.patch               ← патч для apply после git pull
+├── audit_ru.py            ← аудит непереведённых строк
+├── translate_batch.py    ← LLM batch translation (1 запрос на все строки!)
+├── apply_translations.py ← применение переводов к run.py
+├── translations.txt       ← результат LLM-перевода (82 записи)
+└── README.md              ← документация
+```
 
-- Hermes Agent v0.11.0+
-- Исходники в `/root/hermes-agent-src/` (editable install)
-- **НЕ работает** если hermes-agent установлен только из PyPI (site-packages)
+## Workflow — полный цикл
 
-## Как применить
-
-### Шаг 1 — Проверь что исходники на месте
+### 1. Аудит (что осталось перевести)
 
 ```bash
-python3 -c "import hermes.gateway.run as r; print(r.__file__)"
+python3 /root/hermes-ru/audit_ru.py
 ```
 
-Должен показать путь содержащий `hermes-agent-src`.
+Показывает все непереведённые user-facing строки с номерами строк.
 
-### Шаг 2 — Создай резервную копию
+### 2. Batch translation (один LLM-запрос)
 
 ```bash
-cp /root/hermes-agent-src/gateway/run.py /root/hermes-agent-src/gateway/run.py.bak
+cd /root/hermes-ru
+python3 translate_batch.py
 ```
 
-### Шаг 3 — Найди progress_callback и обнови словарь _RU
+Результат: `translations.txt` с переводами всех найденных строк.
 
-Открой `run.py`, найди функцию `progress_callback` (≈строка 9362). Замени словарь `_RU` на:
+**Пропускает:**
+- Internal-only строки (`logger.`, `__dedup__`, `self._running_agents`)
+- Строки с переменными `{result.error_message}`, `{command}`, etc.
+- Уже русские строки
 
-```python
-_RU = {
-    "terminal": "терминал",
-    "process": "процесс",
-    "read_file": "читаю файл",
-    "write_file": "пишу файл",
-    "patch": "патчу файл",
-    "search_files": "ищу в файлах",
-    "web_search": "ищу в сети",
-    "web_extract": "читаю страницу",
-    "browser": "браузер",
-    "browser_navigate": "открываю страницу",
-    "browser_snapshot": "снимок страницы",
-    "browser_click": "кликаю",
-    "browser_type": "ввожу текст",
-    "browser_scroll": "прокручиваю",
-    "browser_back": "назад",
-    "browser_press": "нажимаю",
-    "browser_get_images": "ищу картинки",
-    "browser_vision": "анализирую страницу",
-    "browser_console": "консоль браузера",
-    "browser_dialog": "диалог браузера",
-    "browser_cdp": "браузер CDP",
-    "vision_analyze": "смотрю картинку",
-    "image_generate": "генерирую изображение",
-    "text_to_speech": "озвучиваю",
-    "session_search": "поиск сессий",
-    "memory": "обновляю память",
-    "todo": "планирую",
-    "clarify": "уточняю",
-    "execute_code": "выполняю код",
-    "delegate_task": "делегирую задачу",
-    "cronjob": "планировщик",
-    "send_message": "отправляю сообщение",
-    "skill_view": "читаю скилл",
-    "skill_manager": "управляю скиллами",
-}
-tool_label = _RU.get(tool_name, tool_name) if tool_name else tool_name
+### 3. Применение переводов
+
+```bash
+cd /root/hermes-ru
+python3 apply_translations.py
 ```
 
-### Шаг 4 — Переведи системные сообщения
+- Создаёт бекап `run.py.ru_backup`
+- Применяет переводы из `translations.txt`
+- Пропускает строки с переменными (нужна ручная обработка)
 
-| Найди | Замени на |
-|-------|-----------|
-| `_INTERRUPT_REASON_GATEWAY_SHUTDOWN = "Gateway shutting down"` | `_INTERRUPT_REASON_GATEWAY_SHUTDOWN = "⚠️ Шлюз выключается"` |
-| `_INTERRUPT_REASON_GATEWAY_RESTART = "Gateway restarting"` | `_INTERRUPT_REASON_GATEWAY_RESTART = "🔄 Шлюз перезапускается"` |
-| `return "restarting" if self._restart_requested else "shutting down"` | `return "перезапускается" if self._restart_requested else "выключается"` |
-| `"previous session was stopped or interrupted"` | `"предыдущая сессия была остановлена или прервана"` |
-| фраза с `Session automatically reset` | `f"◐ Сессия сброшена ({reason_text}). История диалога очищена.\n"` |
-| фраза с `Use /resume to browse` | `f"Используй /resume чтобы найти и восстановить предыдущую сессию.\n"` |
-| строка с `♻️ Gateway restarted` | `"♻️ Шлюз успешно перезапущен. Сессия продолжается."` |
-| `⏳ Queued for the next turn` | `⏳ Поставлено в очередь` |
-| `⚡ Interrupting current task` | `⚡ Прерываю текущую задачу` |
-| `✗ Failed to send response to update process` | `✗ Не удалось отправить ответ процессу обновления` |
-| `✓ Sent \`{label}\` to the update process` | `✓ Отправлено \`{label}\` в процесс обновления` |
-| `Usage: /queue <prompt>` | `Использование: /queue <текст>` |
-| `Usage: /steer <prompt>` | `Использование: /steer <текст>` |
-| `⏳ Agent is running — \`/{command}\` can't run mid-turn...` | `⏳ Агент работает — \`/{command}\` нельзя запустить посреди хода.` |
-| `Command \`/{command}\` was blocked by a hook.` | `Команда \`/{command}\` заблокирована хуком.` |
-| `Error: {result.error_message}` | `Ошибка: {result.error_message}` |
-| `Model switched to \`` | `Модель изменена на \`` |
-| `Prompt caching: enabled` | `Кэширование промптов: включено` |
-| `Warning: {msg}` | `Предупреждение: {msg}` |
-| `⚠️ Unknown argument: \`{effort}\`` | `⚠️ Неизвестный аргумент: \`{effort}\`` |
-| `**Valid levels:**` | `**Допустимые уровни:**` |
-| `⚡ /fast is only available for OpenAI models` | `⚡ /fast доступен только для OpenAI-моделей` |
-| `⚡ Priority Processing` | `⚡ Приоритетная обработка` |
-| `Current mode: \`{status}\`` | `Текущий режим: \`{status}\`` |
-| `**Valid options:**` | `**Допустимые варианты:**` |
-| `Voice mode enabled.` | `Голосовой режим включён.` |
-| `Voice mode disabled. Text-only replies.` | `Голосовой режим выключен. Только текстовые ответы.` |
-| `Auto-TTS enabled.` | `Авто-TTS включён.` |
-| `Voice channels are not supported on this platform.` | `Голосовые каналы не поддерживаются на этой платформе.` |
-| `This command only works in a Discord server.` | `Эта команда работает только на Discord-сервере.` |
-| `You need to be in a voice channel first.` | `Сначала подключись к голосовому каналу.` |
-| `Joined voice channel` | `Подключился к голосовому каналу` |
-| `Failed to join voice channel. Check bot permissions` | `Не удалось подключиться к голосовому каналу. Проверь права бота` |
-| `Not in a voice channel.` | `Не в голосовом канале.` |
-| `Left voice channel.` | `Покинул голосовой канал.` |
-| `Usage: /background <prompt>` | `Использование: /background <текст>` |
-| `🔄 Background task started:` | `🔄 Фоновая задача запущена:` |
-| `✅ Background task complete` | `✅ Фоновая задача завершена` |
-| `(No response generated)` | `(Ответ не сгенерирован)` |
-| `Usage: /btw <question>` | `Использование: /btw <вопрос>` |
-| `Nothing to undo.` | `Нечего отменять.` |
-| `↩️ Undid {removed_count} message(s).` | `↩️ Отменено {removed_count} сообщений.` |
-| `✅ Command{'s'} approved{scope_msg}.` | `✅ Команда{'ы' if count > 1 else ''} одобрена{scope_msg}. Агент продолжает...` |
-| `🎤 I received your voice message but can't transcribe it` | `🎤 Получил голосовое сообщение, но не могу распознать` |
-| `📖 **Hermes Commands**` | `📖 **Команды Hermes**` |
-| `⚡ **Skill Commands**` | `⚡ **Команды скиллов**` |
-| `📚 **Commands** ({len(entries)} total, page {page}/{total_pages})` | `📚 **Команды** ({len(entries)} всего, страница {page}/{total_pages})` |
+### 4. Проверка
 
-### Шаг 5 — Перезапусти
+```bash
+python3 -m py_compile /root/hermes-agent-src/gateway/run.py
+python3 /root/hermes-ru/audit_ru.py
+```
+
+### 5. Рестарт
 
 ```bash
 hermes gateway restart
 ```
 
-> ⚠️ **НИКОГДА** не используй `hermes gateway run --replace` — вызывает мультипроцессорный конфликт и ошибку 401. Только `hermes gateway restart`.
-
-### Шаг 6 — Проверь
-
-Напиши боту в Telegram что-нибудь, убедись что браузерные команды показываются на русском.
-
-### Шаг 7 — Откат (если сломалось)
+### 6. Коммит и пуш
 
 ```bash
-cp /root/hermes-agent-src/gateway/run.py.bak /root/hermes-agent-src/gateway/run.py
-hermes gateway restart
-```
-
----
-
-## Push в GitHub
-
-```bash
-cd /root/.hermes/skills/hermes-ru
-git add . && git commit -m "feat: browser sub-tools переведены, v1.1"
+cd /root/hermes-ru
+git add -A && git commit -m "🎉 batch: N переводов"
 git push
 ```
 
-**Токен GitHub** — ищи в скилле `hermes-backup-github`.
+## Обработка строк с переменными
 
----
+Строки типа `↩️ Undid {removed_count} message(s).\nRemoved: "{preview}"` — **НЕ переводятся автоматически** потому что `{ }` placeholder'ы нельзя безопасно заменить.
 
-## 🔁 Автоматическое восстановление патча после git pull
+Для них — ручной патч через `patch()`:
 
-### Создание патча
+```python
+patch(
+    mode="replace",
+    path="/root/hermes-agent-src/gateway/run.py",
+    old_string='return f"↩️ Undid {removed_count} message(s).\nRemoved: \\"{preview}\\""',
+    new_string='return f"↩️ Отменено {removed_count} сообщение(й).\nУдалено: \\"{preview}\\""'
+)
+```
+
+Список строк с переменными (26 шт) — см. `audit_ru.py` вывод.
+
+## ⚠️ После git pull — восстановление
 
 ```bash
 cd /root/hermes-agent-src
-git fetch origin main
-git diff origin/main -- gateway/run.py > /root/.hermes/skills/hermes-ru/ru.patch
+git pull
+cd /root/hermes-ru && python3 apply_translations.py
+hermes gateway restart
 ```
 
-### Создание hook
+Или через hook (опционально):
 
 ```bash
 cat > /root/hermes-agent-src/.git/hooks/post-merge << 'EOF'
 #!/bin/bash
-PATCH="/root/.hermes/skills/hermes-ru/ru.patch"
+PATCH="/root/hermes-ru/ru.patch"
 TARGET="/root/hermes-agent-src/gateway/run.py"
 if [ -f "$PATCH" ]; then
   cd /root/hermes-agent-src
   git apply --ignore-whitespace "$PATCH" 2>/dev/null
-  if grep -q "Шлюз выключается" "$TARGET" 2>/dev/null; then
-    echo "[hermes-ru] ✅ Русификация восстановлена после обновления"
-    nohup hermes gateway restart > /dev/null 2>&1 &
-  else
-    echo "[hermes-ru] ⚠️ Патч не применился — запусти /hermes-ru вручную"
+  if grep -q "Остановлено" "$TARGET" 2>/dev/null; then
+    echo "[hermes-ru] ✅ Русификация восстановлена"
   fi
 fi
 EOF
 chmod +x /root/hermes-agent-src/.git/hooks/post-merge
 ```
 
-### Тест hook
+## Регенерация патча
+
+После изменений — обнови ru.patch:
 
 ```bash
-bash /root/hermes-agent-src/.git/hooks/post-merge
+cd /root/hermes-agent-src
+git diff -- gateway/run.py > /root/hermes-ru/ru.patch
 ```
 
-### Также сохрани патч в backup repo
+---
 
-```bash
-mkdir -p /tmp/hermes-gera-backup/skills/hermes-ru
-cp /root/.hermes/skills/hermes-ru/ru.patch /tmp/hermes-gera-backup/skills/hermes-ru/ru.patch
-cd /tmp/hermes-gera-backup && git add -A && git commit -m "🔧 hermes-ru: обновлённый патч" && git push
-```
+*Обновлено 27.04.2026 — v2.0 (automated batch translation workflow)*
