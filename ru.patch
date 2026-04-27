@@ -1,7 +1,16 @@
 diff --git a/gateway/run.py b/gateway/run.py
-index 8fda2c1f..656e64a7 100644
+index 8fda2c1f..dbf71108 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
+@@ -597,7 +597,7 @@ def _format_gateway_process_notification(evt: dict) -> "str | None":
+     _cmd = evt.get("command", "unknown")
+ 
+     if evt_type == "watch_disabled":
+-        return f"[IMPORTANT: {evt.get('message', '')}]"
++        return f"[ВАЖНО: {evt.get('message', '')}]"
+ 
+     if evt_type == "watch_match":
+         _pat = evt.get("pattern", "?")
 @@ -1621,13 +1621,13 @@ class GatewayRunner:
          status_detail = f" ({', '.join(status_parts)})" if status_parts else ""
          if is_queue_mode:
@@ -122,6 +131,15 @@ index 8fda2c1f..656e64a7 100644
                  # Queue the message so it will be picked up after the
                  # agent starts.
                  adapter = self.adapters.get(source.platform)
+@@ -3668,7 +3686,7 @@ class GatewayRunner:
+                     message = hook_result.get("message")
+                     if isinstance(message, str) and message:
+                         return message
+-                    return f"Command `/{command}` was blocked by a hook."
++                    return f"Команда `/{command}` заблокирована хуком."
+                 if decision == "handled":
+                     message = hook_result.get("message")
+                     return message if isinstance(message, str) and message else None
 @@ -3781,7 +3799,7 @@ class GatewayRunner:
              # message. If the payload is empty, surface the usage hint.
              steer_payload = event.get_command_args().strip()
@@ -131,15 +149,33 @@ index 8fda2c1f..656e64a7 100644
              try:
                  event.text = steer_payload
              except Exception:
-@@ -3819,7 +3837,7 @@ class GatewayRunner:
+@@ -3819,11 +3837,11 @@ class GatewayRunner:
                              output = (stdout or stderr).decode().strip()
                              return output if output else "Command returned no output."
                          except asyncio.TimeoutError:
 -                            return "Quick command timed out (30s)."
 +                            return "Время выполнения быстрой команды истекло (30 секунд)."
                          except Exception as e:
-                             return f"Quick command error: {e}"
+-                            return f"Quick command error: {e}"
++                            return f"Ошибка быстрой команды: {e}"
                      else:
+-                        return f"Quick command '/{command}' has no command defined."
++                        return f"Быстрая команда '/{command}': команда не определена."
+                 elif qcmd.get("type") == "alias":
+                     target = qcmd.get("target", "").strip()
+                     if target:
+@@ -3834,9 +3852,9 @@ class GatewayRunner:
+                         command = target_command
+                         # Fall through to normal command dispatch below
+                     else:
+-                        return f"Quick command '/{command}' has no target defined."
++                        return f"Быстрая команда '/{command}': цель не определена."
+                 else:
+-                    return f"Quick command '/{command}' has unsupported type (supported: 'exec', 'alias')."
++                    return f"Быстрая команда '/{command}': неподдерживаемый тип (допустимо: 'exec', 'alias')."
+ 
+         # Plugin-registered slash commands
+         if command:
 @@ -4193,12 +4211,12 @@ class GatewayRunner:
                              hours = policy.idle_minutes // 60
                              mins = policy.idle_minutes % 60
@@ -234,6 +270,24 @@ index 8fda2c1f..656e64a7 100644
  
          from gateway.config import Platform
          page_size = 15 if event.source.platform == Platform.TELEGRAM else 20
+@@ -5625,7 +5643,7 @@ class GatewayRunner:
+                             custom_providers=custom_provs,
+                         )
+                         if not result.success:
+-                            return f"Error: {result.error_message}"
++                            return f"Ошибка: {result.error_message}"
+ 
+                         # Update cached agent in-place
+                         cached_entry = None
+@@ -5749,7 +5767,7 @@ class GatewayRunner:
+         )
+ 
+         if not result.success:
+-            return f"Error: {result.error_message}"
++            return f"Ошибка: {result.error_message}"
+ 
+         # If there's a cached agent, update it in-place
+         cached_entry = None
 @@ -5910,7 +5928,7 @@ class GatewayRunner:
              except Exception as e:
                  return f"⚠️ Failed to save personality change: {e}"
@@ -243,6 +297,15 @@ index 8fda2c1f..656e64a7 100644
          elif args in personalities:
              new_prompt = _resolve_prompt(personalities[args])
  
+@@ -5926,7 +5944,7 @@ class GatewayRunner:
+             # Update in-memory so it takes effect on the very next message.
+             self._ephemeral_system_prompt = new_prompt
+ 
+-            return f"🎭 Personality set to **{args}**\n_(takes effect on next message)_"
++            return f"🎭 Личность установлена на **{args}**\n_(вступает в силу со следующего сообщения)_"
+ 
+         available = "`none`, " + ", ".join(f"`{n}`" for n in personalities)
+         return f"Unknown personality: `{args}`\n\nAvailable: {available}"
 @@ -5947,7 +5965,7 @@ class GatewayRunner:
                  break
          
@@ -261,6 +324,15 @@ index 8fda2c1f..656e64a7 100644
          
          removed_msg = history[last_user_idx].get("content", "")
          removed_count = len(history) - last_user_idx
+@@ -5990,7 +6008,7 @@ class GatewayRunner:
+         session_entry.last_prompt_tokens = 0
+         
+         preview = removed_msg[:40] + "..." if len(removed_msg) > 40 else removed_msg
+-        return f"↩️ Undid {removed_count} message(s).\nRemoved: \"{preview}\""
++        return f"↩️ Отменено {removed_count} сообщение(й).\nУдалено: \"{preview}\""
+     
+     async def _handle_set_home_command(self, event: MessageEvent) -> str:
+         """Handle /sethome command -- set the current chat as the platform's home channel."""
 @@ -6059,7 +6077,7 @@ class GatewayRunner:
              self._save_voice_modes()
              if adapter:
@@ -336,7 +408,14 @@ index 8fda2c1f..656e64a7 100644
  
      def _handle_voice_timeout_cleanup(self, chat_id: str) -> None:
          """Called by the adapter when a voice channel times out.
-@@ -6754,11 +6772,11 @@ class GatewayRunner:
+@@ -6748,17 +6766,17 @@ class GatewayRunner:
+         if args in ("hide", "off"):
+             self._show_reasoning = False
+             _save_config_key(f"display.platforms.{platform_key}.show_reasoning", False)
+-            return f"🧠 ✓ Reasoning display: **OFF** for **{platform_key}**"
++            return f"🧠 ✓ Отображение рассуждений: **ВЫКЛ** для **{platform_key}**"
+ 
+         # Effort level change
          effort = args.strip()
          if effort == "reset":
              if persist_global:
@@ -350,6 +429,24 @@ index 8fda2c1f..656e64a7 100644
          if effort == "none":
              parsed = {"enabled": False}
          elif effort in ("minimal", "low", "medium", "high", "xhigh"):
+@@ -6776,14 +6794,14 @@ class GatewayRunner:
+             if _save_config_key("agent.reasoning_effort", effort):
+                 self._set_session_reasoning_override(session_key, None)
+                 self._evict_cached_agent(session_key)
+-                return f"🧠 ✓ Reasoning effort set to `{effort}` (saved to config)\n_(takes effect on next message)_"
++                return f"🧠 ✓ Усилие рассуждений установлено на `{effort}` (сохранено в конфигурации)\n_(вступает в силу со следующего сообщения)_"
+             self._set_session_reasoning_override(session_key, parsed)
+             self._evict_cached_agent(session_key)
+-            return f"🧠 ✓ Reasoning effort set to `{effort}` (session only — config save failed)\n_(takes effect on next message)_"
++            return f"🧠 ✓ Усилие рассуждений установлено на `{effort}` (только сессия — сохранение конфига не удалось)\n_(вступает в силу со следующего сообщения)_"
+ 
+         self._set_session_reasoning_override(session_key, parsed)
+         self._evict_cached_agent(session_key)
+-        return f"🧠 ✓ Reasoning effort set to `{effort}` (session only — add `--global` to persist)\n_(takes effect on next message)_"
++        return f"🧠 ✓ Усилие рассуждений установлено на `{effort}` (только сессия — добавь `--global` для сохранения)\n_(вступает в силу со следующего сообщения)_"
+ 
+     async def _handle_fast_command(self, event: MessageEvent) -> str:
+         """Handle /fast — mirror the CLI Priority Processing toggle in gateway chats."""
 @@ -6797,7 +6815,7 @@ class GatewayRunner:
          user_config = _load_gateway_config()
          model = _resolve_gateway_model(user_config)
@@ -359,6 +456,17 @@ index 8fda2c1f..656e64a7 100644
  
          def _save_config_key(key_path: str, value):
              """Save a dot-separated key to config.yaml."""
+@@ -6842,8 +6860,8 @@ class GatewayRunner:
+             )
+ 
+         if _save_config_key("agent.service_tier", saved_value):
+-            return f"⚡ ✓ Priority Processing: **{label}** (saved to config)\n_(takes effect on next message)_"
+-        return f"⚡ ✓ Priority Processing: **{label}** (this session only)"
++            return f"⚡ ✓ Приоритетная обработка: **{label}** (сохранено в конфигурации)\n_(вступает в силу со следующего сообщения)_"
++        return f"⚡ ✓ Приоритетная обработка: **{label}** (только эта сессия)"
+ 
+     async def _handle_yolo_command(self, event: MessageEvent) -> str:
+         """Handle /yolo — toggle dangerous command approval bypass for this session only."""
 @@ -6857,10 +6875,10 @@ class GatewayRunner:
          current = is_session_yolo_enabled(session_key)
          if current:
@@ -408,7 +516,7 @@ index 8fda2c1f..656e64a7 100644
  
          # Ensure session exists in SQLite DB (it may only exist in session_store
          # if this is the first command in a new session)
-@@ -7054,13 +7072,13 @@ class GatewayRunner:
+@@ -7054,27 +7072,27 @@ class GatewayRunner:
              except ValueError as e:
                  return f"⚠️ {e}"
              if not sanitized:
@@ -417,14 +525,23 @@ index 8fda2c1f..656e64a7 100644
              # Set the title
              try:
                  if self._session_db.set_session_title(session_id, sanitized):
-                     return f"✏️ Session title set: **{sanitized}**"
+-                    return f"✏️ Session title set: **{sanitized}**"
++                    return f"✏️ Заголовок сессии установлен: **{sanitized}**"
                  else:
 -                    return "Session not found in database."
 +                    return "Сессия не найдена в базе данных."
              except ValueError as e:
                  return f"⚠️ {e}"
          else:
-@@ -7074,7 +7092,7 @@ class GatewayRunner:
+             # Show the current title and session ID
+             title = self._session_db.get_session_title(session_id)
+             if title:
+-                return f"📌 Session: `{session_id}`\nTitle: **{title}**"
++                return f"📌 Сессия: `{session_id}`\nЗаголовок: **{title}**"
+             else:
+-                return f"📌 Session: `{session_id}`\nNo title set. Usage: `/title My Session Name`"
++                return f"📌 Сессия: `{session_id}`\nЗаголовок не установлен. Использование: `/title Название Сессии`"
+ 
      async def _handle_resume_command(self, event: MessageEvent) -> str:
          """Handle /resume command — switch to a previously-named session."""
          if not self._session_db:
@@ -433,6 +550,24 @@ index 8fda2c1f..656e64a7 100644
  
          source = event.source
          session_key = self._session_key_for_source(source)
+@@ -7104,7 +7122,7 @@ class GatewayRunner:
+                 return "\n".join(lines)
+             except Exception as e:
+                 logger.debug("Failed to list titled sessions: %s", e)
+-                return f"Could not list sessions: {e}"
++                return f"Не удалось получить список сессий: {e}"
+ 
+         # Resolve the name to a session ID.
+         target_id = self._session_db.resolve_session_by_title(name)
+@@ -7123,7 +7141,7 @@ class GatewayRunner:
+         # Check if already on that session
+         current_entry = self.session_store.get_or_create_session(source)
+         if current_entry.session_id == target_id:
+-            return f"📌 Already on session **{name}**."
++            return f"📌 Уже в сессии **{name}**."
+ 
+         # Clear any running agent for this session key
+         self._release_running_agent_state(session_key)
 @@ -7131,7 +7149,7 @@ class GatewayRunner:
          # Switch the session entry to point at the old session
          new_entry = self.session_store.switch_session(session_key, target_id)
@@ -442,6 +577,15 @@ index 8fda2c1f..656e64a7 100644
          self._clear_session_boundary_security_state(session_key)
  
          # Get the title for confirmation
+@@ -7142,7 +7160,7 @@ class GatewayRunner:
+         msg_count = len([m for m in history if m.get("role") == "user"]) if history else 0
+         msg_part = f" ({msg_count} message{'s' if msg_count != 1 else ''})" if msg_count else ""
+ 
+-        return f"↻ Resumed session **{title}**{msg_part}. Conversation restored."
++        return f"↻ Сессия **{title}** восстановлена{msg_part}. Диалог возобновлён."
+ 
+     async def _handle_branch_command(self, event: MessageEvent) -> str:
+         """Handle /branch [name] — fork the current session into a new independent copy.
 @@ -7154,7 +7172,7 @@ class GatewayRunner:
          import uuid as _uuid
  
@@ -478,6 +622,15 @@ index 8fda2c1f..656e64a7 100644
  
      async def _handle_insights_command(self, event: MessageEvent) -> str:
          """Handle /insights command -- show usage insights and analytics."""
+@@ -7420,7 +7438,7 @@ class GatewayRunner:
+             return await loop.run_in_executor(None, _run_insights)
+         except Exception as e:
+             logger.error("Insights command error: %s", e, exc_info=True)
+-            return f"Error generating insights: {e}"
++            return f"Ошибка генерации инсайтов: {e}"
+ 
+     async def _handle_reload_mcp_command(self, event: MessageEvent) -> str:
+         """Handle /reload-mcp command -- disconnect and reconnect all MCP servers."""
 @@ -7525,8 +7543,8 @@ class GatewayRunner:
          if not has_blocking_approval(session_key):
              if session_key in self._pending_approvals:
@@ -498,6 +651,15 @@ index 8fda2c1f..656e64a7 100644
  
          # Resume typing indicator — agent is about to continue processing.
          _adapter = self.adapters.get(source.platform)
+@@ -7554,7 +7572,7 @@ class GatewayRunner:
+ 
+         count_msg = f" ({count} commands)" if count > 1 else ""
+         logger.info("User approved %d dangerous command(s) via /approve%s", count, scope_msg)
+-        return f"✅ Command{'s' if count > 1 else ''} approved{scope_msg}{count_msg}. The agent is resuming..."
++        return f"✅ Команда{'ы' if count > 1 else ''} одобрена{scope_msg}{count_msg}. Агент продолжает..."
+ 
+     async def _handle_deny_command(self, event: MessageEvent) -> str:
+         """Handle /deny command — reject pending dangerous command(s).
 @@ -7574,15 +7592,15 @@ class GatewayRunner:
          if not has_blocking_approval(session_key):
              if session_key in self._pending_approvals:
@@ -517,7 +679,16 @@ index 8fda2c1f..656e64a7 100644
  
          # Resume typing indicator — agent continues (with BLOCKED result).
          _adapter = self.adapters.get(source.platform)
-@@ -7663,7 +7681,7 @@ class GatewayRunner:
+@@ -7591,7 +7609,7 @@ class GatewayRunner:
+ 
+         count_msg = f" ({count} commands)" if count > 1 else ""
+         logger.info("User denied %d dangerous command(s) via /deny", count)
+-        return f"❌ Command{'s' if count > 1 else ''} denied{count_msg}."
++        return f"❌ Команда{'ы' if count > 1 else ''} отклонены{count_msg}."
+ 
+     # Platforms where /update is allowed.  ACP, API server, and webhooks are
+     # programmatic interfaces that should not trigger system updates.
+@@ -7663,16 +7681,16 @@ class GatewayRunner:
          # Block non-messaging platforms (API server, webhooks, ACP)
          platform = event.source.platform
          if platform not in self._UPDATE_ALLOWED_PLATFORMS:
@@ -525,8 +696,10 @@ index 8fda2c1f..656e64a7 100644
 +            return "✗ /update доступна только из мессенджеров. Запустите `hermes update` из терминала."
  
          if is_managed():
-             return f"✗ {format_managed_message('update Hermes Agent')}"
-@@ -7672,7 +7690,7 @@ class GatewayRunner:
+-            return f"✗ {format_managed_message('update Hermes Agent')}"
++            return f"✗ {format_managed_message('обновление Hermes')}"
+ 
+         project_root = Path(__file__).parent.parent.resolve()
          git_dir = project_root / '.git'
  
          if not git_dir.exists():
