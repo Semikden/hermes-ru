@@ -1,7 +1,7 @@
 ---
 name: hermes-ru
-description: "Автоматизированная русификация Telegram-интерфейса Hermes Agent. LLM batch translation + ручной патч переменных = 100% покрытие. GitHub: Semikden/hermes-ru. Статус: ✅ 100% (82/82), 3 пропущены (чистые переменные)."
-version: 2.1
+description: "Автоматизированная русификация Telegram-интерфейса Hermes Agent. Патчит run.py (100%, 82/82) + commands.py (~60 описаний команд). GitHub: Semikden/hermes-ru."
+version: 2.2
 author: Denis (Hermes community)
 ---
 
