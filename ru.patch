@@ -1,5 +1,5 @@
 diff --git a/gateway/run.py b/gateway/run.py
-index 8fda2c1f..d04ac655 100644
+index 8fda2c1f..72e87284 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -597,7 +597,7 @@ def _format_gateway_process_notification(evt: dict) -> "str | None":
@@ -158,6 +158,17 @@ index 8fda2c1f..d04ac655 100644
  
              # /approve and /deny must bypass the running-agent interrupt path.
              # The agent thread is blocked on a threading.Event inside
+@@ -3540,8 +3561,8 @@ class GatewayRunner:
+             # producing a zero-char response. See #5057, #6252, #10370.
+             if _cmd_def_inner:
+                 return (
+-                    f"⏳ Agent is running — `/{_cmd_def_inner.name}` can't run "
+-                    f"mid-turn. Wait for the current response or `/stop` first."
++                    f"⏳ Агент работает — `/{_cmd_def_inner.name}` нельзя запустить "
++                    f"в середине хода. Дождись ответа или `/stop`."
+                 )
+ 
+             if event.message_type == MessageType.PHOTO:
 @@ -3584,7 +3605,7 @@ class GatewayRunner:
                      # Force-clean the sentinel so the session is unlocked.
                      self._release_running_agent_state(_quick_key)
@@ -268,6 +279,34 @@ index 8fda2c1f..d04ac655 100644
                      )
          
          # -----------------------------------------------------------------
+@@ -5173,19 +5194,19 @@ class GatewayRunner:
+                 title = None
+ 
+         lines = [
+-            "📊 **Hermes Gateway Status**",
++            "📊 **Статус Hermes Gateway**",
+             "",
+-            f"**Session ID:** `{session_entry.session_id}`",
++            f"**ID сессии:** `{session_entry.session_id}`",
+         ]
+         if title:
+-            lines.append(f"**Title:** {title}")
++            lines.append(f"**Название:** {title}")
+         lines.extend([
+-            f"**Created:** {session_entry.created_at.strftime('%Y-%m-%d %H:%M')}",
+-            f"**Last Activity:** {session_entry.updated_at.strftime('%Y-%m-%d %H:%M')}",
+-            f"**Tokens:** {session_entry.total_tokens:,}",
+-            f"**Agent Running:** {'Yes ⚡' if is_running else 'No'}",
++            f"**Создана:** {session_entry.created_at.strftime('%Y-%m-%d %H:%M')}",
++            f"**Последняя активность:** {session_entry.updated_at.strftime('%Y-%m-%d %H:%M')}",
++            f"**Токенов:** {session_entry.total_tokens:,}",
++            f"**Агент работает:** {'Да ⚡' if is_running else 'Нет'}",
+             "",
+-            f"**Connected Platforms:** {', '.join(connected_platforms)}",
++            f"**Подключённые платформы:** {', '.join(connected_platforms)}",
+         ])
+ 
+         return "\n".join(lines)
 @@ -5305,7 +5326,7 @@ class GatewayRunner:
                  invalidation_reason="stop_command_pending",
              )
@@ -423,7 +462,19 @@ index 8fda2c1f..d04ac655 100644
      
      async def _handle_set_home_command(self, event: MessageEvent) -> str:
          """Handle /sethome command -- set the current chat as the platform's home channel."""
-@@ -6059,7 +6080,7 @@ class GatewayRunner:
+@@ -6050,24 +6071,24 @@ class GatewayRunner:
+             if adapter:
+                 self._set_adapter_auto_tts_enabled(adapter, chat_id, enabled=True)
+             return (
+-                "Voice mode enabled.\n"
+-                "I'll reply with voice when you send voice messages.\n"
+-                "Use /voice tts to get voice replies for all messages."
++                "Голосовой режим включён.\n"
++                "Буду отвечать голосом на голосовые сообщения.\n"
++                "Используй /voice tts чтобы получать голосовые ответы на все сообщения."
+             )
+         elif args in ("off", "disable"):
+             self._voice_mode[voice_key] = "off"
              self._save_voice_modes()
              if adapter:
                  self._set_adapter_auto_tts_disabled(adapter, chat_id, disabled=True)
@@ -432,6 +483,50 @@ index 8fda2c1f..d04ac655 100644
          elif args == "tts":
              self._voice_mode[voice_key] = "all"
              self._save_voice_modes()
+             if adapter:
+                 self._set_adapter_auto_tts_enabled(adapter, chat_id, enabled=True)
+             return (
+-                "Auto-TTS enabled.\n"
+-                "All replies will include a voice message."
++                "Авто-TTS включён.\n"
++                "Все ответы будут содержать голосовое сообщение."
+             )
+         elif args in ("channel", "join"):
+             return await self._handle_voice_channel_join(event)
+@@ -6076,9 +6097,9 @@ class GatewayRunner:
+         elif args == "status":
+             mode = self._voice_mode.get(voice_key, "off")
+             labels = {
+-                "off": "Off (text only)",
+-                "voice_only": "On (voice reply to voice messages)",
+-                "all": "TTS (voice reply to all messages)",
++                "off": "Выкл (только текст)",
++                "voice_only": "Вкл (голосовой ответ на голосовые)",
++                "all": "TTS (голосовой ответ на все)",
+             }
+             # Append voice channel info if connected
+             adapter = self.adapters.get(event.source.platform)
+@@ -6087,15 +6108,15 @@ class GatewayRunner:
+                 info = adapter.get_voice_channel_info(guild_id)
+                 if info:
+                     lines = [
+-                        f"Voice mode: {labels.get(mode, mode)}",
+-                        f"Voice channel: #{info['channel_name']}",
+-                        f"Participants: {info['member_count']}",
++                        f"Голосовой режим: {labels.get(mode, mode)}",
++                        f"Голосовой канал: #{info['channel_name']}",
++                        f"Участников: {info['member_count']}",
+                     ]
+                     for m in info["members"]:
+-                        status = " (speaking)" if m.get("is_speaking") else ""
++                        status = " (говорит)" if m.get("is_speaking") else ""
+                         lines.append(f"  - {m['display_name']}{status}")
+                     return "\n".join(lines)
+-            return f"Voice mode: {labels.get(mode, mode)}"
++            return f"Голосовой режим: {labels.get(mode, mode)}"
+         else:
+             # Toggle: off → on, on/all → off
+             current = self._voice_mode.get(voice_key, "off")
 @@ -6104,29 +6125,29 @@ class GatewayRunner:
                  self._save_voice_modes()
                  if adapter:
