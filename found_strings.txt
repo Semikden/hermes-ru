@@ -1,0 +1,818 @@
+# Found 816 user-facing strings
+
+/root/hermes-agent-src/gateway/run.py|99|.env
+/root/hermes-agent-src/gateway/run.py|100|.env
+/root/hermes-agent-src/gateway/run.py|237|_cfg
+/root/hermes-agent-src/gateway/run.py|338|Primary provider auth failed: %s — trying fallback
+/root/hermes-agent-src/gateway/run.py|381|Fallback provider resolved: %s
+/root/hermes-agent-src/gateway/run.py|392|Fallback entry %s failed: %s
+/root/hermes-agent-src/gateway/run.py|431|Stop requested
+/root/hermes-agent-src/gateway/run.py|432|Session reset requested
+/root/hermes-agent-src/gateway/run.py|433|Execution timed out (inactivity)
+/root/hermes-agent-src/gateway/run.py|435|Gateway shutting down
+/root/hermes-agent-src/gateway/run.py|436|Gateway restarting
+/root/hermes-agent-src/gateway/run.py|451|Return True when an interrupt message is internal control flow.
+/root/hermes-agent-src/gateway/run.py|475|SKILL.md
+/root/hermes-agent-src/gateway/run.py|476|.git
+/root/hermes-agent-src/gateway/run.py|476|.github
+/root/hermes-agent-src/gateway/run.py|476|.hub
+/root/hermes-agent-src/gateway/run.py|481|The **{command_name}** skill is installed but disabled.\n
+/root/hermes-agent-src/gateway/run.py|482|Enable it with: `hermes skills config`
+/root/hermes-agent-src/gateway/run.py|490|SKILL.md
+/root/hermes-agent-src/gateway/run.py|498|The **{command_name}** skill is available but not installed.\n
+/root/hermes-agent-src/gateway/run.py|499|Install it with: `hermes skills install {install_path}`
+/root/hermes-agent-src/gateway/run.py|507|Map a Platform enum to its config.yaml key (LOCAL→
+/root/hermes-agent-src/gateway/run.py|507|, rest→enum value).
+/root/hermes-agent-src/gateway/run.py|520|Could not load gateway config from %s
+/root/hermes-agent-src/gateway/run.py|594|Format a watch pattern event from completion_queue into a [IMPORTANT:] message.
+/root/hermes-agent-src/gateway/run.py|608|.\n
+/root/hermes-agent-src/gateway/run.py|609|Command: {_cmd}\n
+/root/hermes-agent-src/gateway/run.py|610|Matched output:\n{_out}
+/root/hermes-agent-src/gateway/run.py|699|OrderedDict[str, tuple]
+/root/hermes-agent-src/gateway/run.py|784|).strip().lower() != 
+/root/hermes-agent-src/gateway/run.py|816|Docker backend is enabled for the messaging gateway but no explicit host-visible 
+/root/hermes-agent-src/gateway/run.py|818|This is fine if the model already emits host-visible paths, but MEDIA file delivery can fail 
+/root/hermes-agent-src/gateway/run.py|827|Check if the hermes-agent-setup skill is installed.
+/root/hermes-agent-src/gateway/run.py|839|Return a platform-namespaced key for voice mode state.
+/root/hermes-agent-src/gateway/run.py|840|{platform.value}:{chat_id}
+/root/hermes-agent-src/gateway/run.py|860|Skipping legacy unprefixed voice mode key %r during migration. 
+/root/hermes-agent-src/gateway/run.py|861|Re-enable voice mode on that chat to rebuild the prefixed key.
+/root/hermes-agent-src/gateway/run.py|875|Failed to save voice modes: %s
+/root/hermes-agent-src/gateway/run.py|879|_auto_tts_disabled_chats
+/root/hermes-agent-src/gateway/run.py|885|_auto_tts_enabled_chats
+/root/hermes-agent-src/gateway/run.py|897|_auto_tts_enabled_chats
+/root/hermes-agent-src/gateway/run.py|903|_auto_tts_disabled_chats
+/root/hermes-agent-src/gateway/run.py|921|_auto_tts_disabled_chats
+/root/hermes-agent-src/gateway/run.py|922|_auto_tts_enabled_chats
+/root/hermes-agent-src/gateway/run.py|936|_auto_tts_default
+/root/hermes-agent-src/gateway/run.py|939|{platform.value}:
+/root/hermes-agent-src/gateway/run.py|959|Unclosed client session
+/root/hermes-agent-src/gateway/run.py|968|Defensive %s disconnect after failed connect raised: %s
+/root/hermes-agent-src/gateway/run.py|990|Resolve the current session key for a source, honoring gateway config when available.
+/root/hermes-agent-src/gateway/run.py|1037|Session model override (fast): session=%s config_model=%s -> override_model=%s provider=%s
+/root/hermes-agent-src/gateway/run.py|1045|Session model override (no api_key, fallback): session=%s config_model=%s override_model=%s
+/root/hermes-agent-src/gateway/run.py|1050|No session model override: session=%s config_model=%s override_keys=%s
+/root/hermes-agent-src/gateway/run.py|1071|No model configured — defaulting to %s for provider %s
+/root/hermes-agent-src/gateway/run.py|1111|_service_tier
+/root/hermes-agent-src/gateway/run.py|1130|Fatal %s adapter error (%s): %s
+/root/hermes-agent-src/gateway/run.py|1165|All messaging adapters disconnected
+/root/hermes-agent-src/gateway/run.py|1168|No connected messaging platforms remain. Shutting down gateway for service restart.
+/root/hermes-agent-src/gateway/run.py|1170|No connected messaging platforms remain. Shutting down gateway cleanly.
+/root/hermes-agent-src/gateway/run.py|1177|All messaging platforms failed with retryable errors
+/root/hermes-agent-src/gateway/run.py|1180|All messaging platforms failed with retryable errors. 
+/root/hermes-agent-src/gateway/run.py|1181|Shutting down gateway for service restart (systemd will retry).
+/root/hermes-agent-src/gateway/run.py|1186|No connected messaging platforms remain, but %d platform(s) queued for reconnection
+/root/hermes-agent-src/gateway/run.py|1205|перезапускается
+/root/hermes-agent-src/gateway/run.py|1205|выключается
+/root/hermes-agent-src/gateway/run.py|1266|Prefill messages file not found: %s
+/root/hermes-agent-src/gateway/run.py|1272|Prefill messages file must contain a JSON array: %s
+/root/hermes-agent-src/gateway/run.py|1276|Failed to load prefill messages from %s: %s
+/root/hermes-agent-src/gateway/run.py|1333|).strip().replace(
+/root/hermes-agent-src/gateway/run.py|1356|Resolve reasoning effort for a session, honoring session overrides.
+/root/hermes-agent-src/gateway/run.py|1364|_session_reasoning_overrides
+/root/hermes-agent-src/gateway/run.py|1374|Set or clear the session-scoped reasoning override.
+/root/hermes-agent-src/gateway/run.py|1377|_session_reasoning_overrides
+/root/hermes-agent-src/gateway/run.py|1413|Load show_reasoning toggle from config.yaml display section.
+/root/hermes-agent-src/gateway/run.py|1504|Load OpenRouter provider routing preferences from config.yaml.
+/root/hermes-agent-src/gateway/run.py|1560|⏳ {_status_action_gerund_ru()} — в очереди на следующий ход. Вернусь когда освобожусь.
+/root/hermes-agent-src/gateway/run.py|1562|⏳ Шлюз {_status_action_gerund_ru()} — сейчас занят и не может принять новый ход.
+/root/hermes-agent-src/gateway/run.py|1616|{elapsed_min} мин прошло
+/root/hermes-agent-src/gateway/run.py|1618|итерация {iteration}/{max_iter}
+/root/hermes-agent-src/gateway/run.py|1620|работает: {current_tool}
+/root/hermes-agent-src/gateway/run.py|1627|⏳ В очереди на следующий ход{status_detail}. 
+/root/hermes-agent-src/gateway/run.py|1628|Отвечу когда текущая задача завершится.
+/root/hermes-agent-src/gateway/run.py|1632|⚡ Прерываю текущую задачу{status_detail}. 
+/root/hermes-agent-src/gateway/run.py|1633|Скоро отвечу на твоё сообщение.
+/root/hermes-agent-src/gateway/run.py|1655|Failed to apply busy-input onboarding hint: %s
+/root/hermes-agent-src/gateway/run.py|1666|Failed to send busy-ack: %s
+/root/hermes-agent-src/gateway/run.py|1706|Interrupted running agent for session %s during shutdown
+/root/hermes-agent-src/gateway/run.py|1708|Failed interrupting agent during shutdown: %s
+/root/hermes-agent-src/gateway/run.py|1723|Your current task will be interrupted. 
+/root/hermes-agent-src/gateway/run.py|1726|Your current task will be interrupted.
+/root/hermes-agent-src/gateway/run.py|1728|⚠️ Gateway {action} — {hint}
+/root/hermes-agent-src/gateway/run.py|1740|Failed to load session origin for shutdown notification %s: %s
+/root/hermes-agent-src/gateway/run.py|1778|Sent shutdown notification to %s:%s
+/root/hermes-agent-src/gateway/run.py|1783|Failed to send shutdown notification to %s:%s: %s
+/root/hermes-agent-src/gateway/run.py|1801|Best-effort cleanup for temporary or cached agent instances.
+/root/hermes-agent-src/gateway/run.py|1819|.restart_failure_counts
+/root/hermes-agent-src/gateway/run.py|1876|Auto-suspended stuck session %s (active across %d 
+/root/hermes-agent-src/gateway/run.py|1924|Could not locate hermes binary for detached /restart
+/root/hermes-agent-src/gateway/run.py|1972|Starting Hermes Gateway...
+/root/hermes-agent-src/gateway/run.py|1973|Session storage: %s
+/root/hermes-agent-src/gateway/run.py|1978|Active profile: %s
+/root/hermes-agent-src/gateway/run.py|2004|).lower() in (
+/root/hermes-agent-src/gateway/run.py|2005|).lower() in (
+/root/hermes-agent-src/gateway/run.py|2020|No user allowlists configured. All unauthorized users will be denied. 
+/root/hermes-agent-src/gateway/run.py|2022|or configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id).
+/root/hermes-agent-src/gateway/run.py|2066|Recovered %s background process(es) from previous run
+/root/hermes-agent-src/gateway/run.py|2068|Process checkpoint recovery: %s
+/root/hermes-agent-src/gateway/run.py|2079|.clean_shutdown
+/root/hermes-agent-src/gateway/run.py|2081|Previous gateway exited cleanly — skipping session suspension
+/root/hermes-agent-src/gateway/run.py|2090|Suspended %d in-flight session(s) from previous run
+/root/hermes-agent-src/gateway/run.py|2092|Session suspension on startup failed: %s
+/root/hermes-agent-src/gateway/run.py|2101|Auto-suspended %d stuck-loop session(s)
+/root/hermes-agent-src/gateway/run.py|2103|Stuck-loop detection failed: %s
+/root/hermes-agent-src/gateway/run.py|2118|No adapter available for %s
+/root/hermes-agent-src/gateway/run.py|2128|Connecting to %s...
+/root/hermes-agent-src/gateway/run.py|2149|✗ %s failed to connect
+/root/hermes-agent-src/gateway/run.py|2154|Unclosed client session
+/root/hermes-agent-src/gateway/run.py|2172|{platform.value}: {adapter.fatal_error_message}
+/root/hermes-agent-src/gateway/run.py|2189|{platform.value}: failed to connect
+/root/hermes-agent-src/gateway/run.py|2198|✗ %s error: %s
+/root/hermes-agent-src/gateway/run.py|2209|{platform.value}: {e}
+/root/hermes-agent-src/gateway/run.py|2220|Gateway hit a non-retryable startup conflict: %s
+/root/hermes-agent-src/gateway/run.py|2230|Gateway failed to connect any configured messaging platform: %s
+/root/hermes-agent-src/gateway/run.py|2237|No messaging platforms enabled.
+/root/hermes-agent-src/gateway/run.py|2238|Gateway will continue running for cron job execution.
+/root/hermes-agent-src/gateway/run.py|2255|Gateway running with %s platform(s)
+/root/hermes-agent-src/gateway/run.py|2262|Channel directory built: %d target(s)
+/root/hermes-agent-src/gateway/run.py|2264|Channel directory build failed: %s
+/root/hermes-agent-src/gateway/run.py|2272|.update_pending.json
+/root/hermes-agent-src/gateway/run.py|2273|.update_pending.claimed.json
+/root/hermes-agent-src/gateway/run.py|2287|Resumed watcher for recovered process %s
+/root/hermes-agent-src/gateway/run.py|2289|Recovered watcher setup error: %s
+/root/hermes-agent-src/gateway/run.py|2297|Starting reconnection watcher for %d failed platform(s): %s
+/root/hermes-agent-src/gateway/run.py|2303|Press Ctrl+C to stop
+/root/hermes-agent-src/gateway/run.py|2343|Session expiry: %d sessions to finalize (%s)
+/root/hermes-agent-src/gateway/run.py|2364|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|2386|Session expiry finalized for %s
+/root/hermes-agent-src/gateway/run.py|2395|Session finalize gave up after %d attempts for %s: %s. 
+/root/hermes-agent-src/gateway/run.py|2396|Marking as finalized to prevent infinite retry loop.
+/root/hermes-agent-src/gateway/run.py|2405|Session finalize failed (%d/%d) for %s: %s
+/root/hermes-agent-src/gateway/run.py|2416|Session expiry done: %d finalized, %d pending retry
+/root/hermes-agent-src/gateway/run.py|2421|Session expiry done: %d finalized
+/root/hermes-agent-src/gateway/run.py|2432|Agent cache idle sweep: evicted %d agent(s)
+/root/hermes-agent-src/gateway/run.py|2436|Idle agent sweep failed: %s
+/root/hermes-agent-src/gateway/run.py|2444|_last_session_store_prune_ts
+/root/hermes-agent-src/gateway/run.py|2455|SessionStore prune: dropped %d stale entries
+/root/hermes-agent-src/gateway/run.py|2459|SessionStore prune failed: %s
+/root/hermes-agent-src/gateway/run.py|2462|Session expiry watcher error: %s
+/root/hermes-agent-src/gateway/run.py|2499|Giving up reconnecting %s after %d attempts
+/root/hermes-agent-src/gateway/run.py|2516|Reconnect %s: adapter creation returned None, removing from retry queue
+/root/hermes-agent-src/gateway/run.py|2557|Reconnect %s: non-retryable error (%s), removing from retry queue
+/root/hermes-agent-src/gateway/run.py|2572|Reconnect %s failed, next retry in %ds
+/root/hermes-agent-src/gateway/run.py|2586|Reconnect %s error: %s, next retry in %ds
+/root/hermes-agent-src/gateway/run.py|2603|Stop the gateway and disconnect all adapters.
+/root/hermes-agent-src/gateway/run.py|2631|Shutdown (%s): killed %d tool subprocess(es)
+/root/hermes-agent-src/gateway/run.py|2648|Stopping gateway%s...
+/root/hermes-agent-src/gateway/run.py|2662|Gateway drain timed out after %.1fs with %d active agent(s); interrupting remaining work.
+/root/hermes-agent-src/gateway/run.py|2740|Failed to launch detached gateway restart: %s
+/root/hermes-agent-src/gateway/run.py|2748|✗ %s background-task cancel error: %s
+/root/hermes-agent-src/gateway/run.py|2753|✗ %s disconnect error: %s
+/root/hermes-agent-src/gateway/run.py|2766|_busy_ack_ts
+/root/hermes-agent-src/gateway/run.py|2785|_db
+/root/hermes-agent-src/gateway/run.py|2791|SessionDB close error: %s
+/root/hermes-agent-src/gateway/run.py|2807|.clean_shutdown
+/root/hermes-agent-src/gateway/run.py|2812|Skipping .clean_shutdown marker — drain timed out with 
+/root/hermes-agent-src/gateway/run.py|2814|active sessions.
+/root/hermes-agent-src/gateway/run.py|2827|Gateway restart requested
+/root/hermes-agent-src/gateway/run.py|2831|Gateway stopped
+/root/hermes-agent-src/gateway/run.py|2837|Wait for shutdown signal.
+/root/hermes-agent-src/gateway/run.py|2845|Create the appropriate adapter for a platform.
+/root/hermes-agent-src/gateway/run.py|2859|Telegram: python-telegram-bot not installed
+/root/hermes-agent-src/gateway/run.py|2866|Discord: discord.py not installed
+/root/hermes-agent-src/gateway/run.py|2873|WhatsApp: Node.js not installed or bridge not configured
+/root/hermes-agent-src/gateway/run.py|2887|Signal: SIGNAL_HTTP_URL or SIGNAL_ACCOUNT not configured
+/root/hermes-agent-src/gateway/run.py|2894|HomeAssistant: aiohttp not installed or HASS_TOKEN not set
+/root/hermes-agent-src/gateway/run.py|2901|Email: EMAIL_ADDRESS, EMAIL_PASSWORD, EMAIL_IMAP_HOST, or EMAIL_SMTP_HOST not set
+/root/hermes-agent-src/gateway/run.py|2915|DingTalk: dingtalk-stream not installed or DINGTALK_CLIENT_ID/SECRET not set
+/root/hermes-agent-src/gateway/run.py|2922|Feishu: lark-oapi not installed or FEISHU_APP_ID/SECRET not set
+/root/hermes-agent-src/gateway/run.py|2932|WeComCallback: aiohttp/httpx not installed
+/root/hermes-agent-src/gateway/run.py|2939|WeCom: aiohttp not installed or WECOM_BOT_ID/SECRET not set
+/root/hermes-agent-src/gateway/run.py|2946|Weixin: aiohttp/cryptography not installed
+/root/hermes-agent-src/gateway/run.py|2953|Mattermost: MATTERMOST_TOKEN or MATTERMOST_URL not set, or aiohttp missing
+/root/hermes-agent-src/gateway/run.py|2974|Webhook: aiohttp not installed
+/root/hermes-agent-src/gateway/run.py|2983|BlueBubbles: aiohttp/httpx missing or BLUEBUBBLES_SERVER_URL/BLUEBUBBLES_PASSWORD not configured
+/root/hermes-agent-src/gateway/run.py|3062|).lower() in (
+/root/hermes-agent-src/gateway/run.py|3069|Unauthorized user
+/root/hermes-agent-src/gateway/run.py|3101|).lower() in (
+/root/hermes-agent-src/gateway/run.py|3265|Ignoring message with no user_id from %s
+/root/hermes-agent-src/gateway/run.py|3268|Unauthorized user: %s (%s) on %s
+/root/hermes-agent-src/gateway/run.py|3287|Ask the bot owner to run:\n
+/root/hermes-agent-src/gateway/run.py|3295|Too many pairing requests right now~ 
+/root/hermes-agent-src/gateway/run.py|3296|Please try again later!
+/root/hermes-agent-src/gateway/run.py|3307|_update_prompt_pending
+/root/hermes-agent-src/gateway/run.py|3319|.update_response
+/root/hermes-agent-src/gateway/run.py|3321|.tmp
+/root/hermes-agent-src/gateway/run.py|3325|Failed to write update response: %s
+/root/hermes-agent-src/gateway/run.py|3326|✗ Failed to send response to update process: {e}
+/root/hermes-agent-src/gateway/run.py|3329|✓ Sent `{label}` to the update process.
+/root/hermes-agent-src/gateway/run.py|3362|({_stale_idle:.0f}s ago) 
+/root/hermes-agent-src/gateway/run.py|3380|Evicting stale _running_agents entry for %s 
+/root/hermes-agent-src/gateway/run.py|3381|(age: %.0fs, idle: %.0fs, timeout: %.0fs)%s
+/root/hermes-agent-src/gateway/run.py|3419|⚡ Остановлено. Можешь продолжить эту сессию.
+/root/hermes-agent-src/gateway/run.py|3444|Использование: /queue <текст>
+/root/hermes-agent-src/gateway/run.py|3455|⏳ В очереди на следующий ход.
+/root/hermes-agent-src/gateway/run.py|3465|Использование: /steer <текст>
+/root/hermes-agent-src/gateway/run.py|3484|Steer failed for session %s: %s
+/root/hermes-agent-src/gateway/run.py|3485|⚠️ Steer failed: {exc}
+/root/hermes-agent-src/gateway/run.py|3487|...
+/root/hermes-agent-src/gateway/run.py|3489|Управление отклонено (пустая нагрузка).
+/root/hermes-agent-src/gateway/run.py|3576|3.0
+/root/hermes-agent-src/gateway/run.py|3587|Telegram follow-up arrived %.2fs after run start for %s — queueing without interrupt
+/root/hermes-agent-src/gateway/run.py|3608|⚡ Принудительно остановлено. Агент все еще запускался — сессия разблокирована.
+/root/hermes-agent-src/gateway/run.py|3624|⏳ {_status_action_gerund_ru()} — в очереди на следующий ход. Вернусь когда освобожусь.
+/root/hermes-agent-src/gateway/run.py|3626|⏳ Шлюз {_status_action_gerund_ru()} — сейчас занят и не может принять новый ход.
+/root/hermes-agent-src/gateway/run.py|3805|Использование: /steer <текст>  (агент не работает; отправка как обычное сообщение)
+/root/hermes-agent-src/gateway/run.py|3818|⏳ Шлюз {_status_action_gerund_ru()} — сейчас занят и не может принять новую работу.
+/root/hermes-agent-src/gateway/run.py|3841|Command returned no output.
+/root/hermes-agent-src/gateway/run.py|3843|Время выполнения быстрой команды истекло (30 секунд).
+/root/hermes-agent-src/gateway/run.py|3845|Ошибка быстрой команды: {e}
+/root/hermes-agent-src/gateway/run.py|3877|Plugin command dispatch failed (non-fatal): %s
+/root/hermes-agent-src/gateway/run.py|3903|The **{_skill_name}** skill is disabled for {_plat}.\n
+/root/hermes-agent-src/gateway/run.py|3904|Enable it with: `hermes skills config`
+/root/hermes-agent-src/gateway/run.py|3929|Unrecognized slash command /%s from %s — 
+/root/hermes-agent-src/gateway/run.py|3938|as a regular message.
+/root/hermes-agent-src/gateway/run.py|3941|Skill command check failed (non-fatal): %s
+/root/hermes-agent-src/gateway/run.py|3971|_busy_ack_ts
+/root/hermes-agent-src/gateway/run.py|3996|[{source.user_name}] {message_text}
+/root/hermes-agent-src/gateway/run.py|4020|No STT provider
+/root/hermes-agent-src/gateway/run.py|4032|no speech-to-text provider is configured.\n\n
+/root/hermes-agent-src/gateway/run.py|4033|To enable voice: install faster-whisper 
+/root/hermes-agent-src/gateway/run.py|4035|and set `stt.enabled: true` in config.yaml, 
+/root/hermes-agent-src/gateway/run.py|4051|.txt
+/root/hermes-agent-src/gateway/run.py|4051|.md
+/root/hermes-agent-src/gateway/run.py|4051|.csv
+/root/hermes-agent-src/gateway/run.py|4051|.log
+/root/hermes-agent-src/gateway/run.py|4051|.json
+/root/hermes-agent-src/gateway/run.py|4051|.xml
+/root/hermes-agent-src/gateway/run.py|4051|.yaml
+/root/hermes-agent-src/gateway/run.py|4051|.yml
+/root/hermes-agent-src/gateway/run.py|4051|.toml
+/root/hermes-agent-src/gateway/run.py|4051|.ini
+/root/hermes-agent-src/gateway/run.py|4051|.cfg
+/root/hermes-agent-src/gateway/run.py|4068|[^\w.\- ]
+/root/hermes-agent-src/gateway/run.py|4073|Its content has been included below. 
+/root/hermes-agent-src/gateway/run.py|4074|The file is also saved at: {path}]
+/root/hermes-agent-src/gateway/run.py|4079|The file is saved at: {path}. 
+/root/hermes-agent-src/gateway/run.py|4117|Context injection refused.
+/root/hermes-agent-src/gateway/run.py|4128|Inner handler that runs under the _running_agents sentinel guard.
+/root/hermes-agent-src/gateway/run.py|4131|)[:80].replace(
+/root/hermes-agent-src/gateway/run.py|4212|daily schedule at {policy.at_hour}:00
+/root/hermes-agent-src/gateway/run.py|4217|неактивна {duration}
+/root/hermes-agent-src/gateway/run.py|4219|◐ Сессия сброшена ({reason_text}). 
+/root/hermes-agent-src/gateway/run.py|4220|История диалога очищена.\n
+/root/hermes-agent-src/gateway/run.py|4222|Настроить тайминг сброса: config.yaml → session_reset.
+/root/hermes-agent-src/gateway/run.py|4235|Auto-reset notification failed (non-fatal): %s
+/root/hermes-agent-src/gateway/run.py|4257|Follow its instructions for this session.]
+/root/hermes-agent-src/gateway/run.py|4377|).rstrip(
+/root/hermes-agent-src/gateway/run.py|4439|Session hygiene: %s messages, ~%s tokens (%s) — auto-compressing 
+/root/hermes-agent-src/gateway/run.py|4508|Session hygiene: compressed %s → %s msgs, 
+/root/hermes-agent-src/gateway/run.py|4516|Session hygiene: still ~%s tokens after 
+/root/hermes-agent-src/gateway/run.py|4525|Session hygiene auto-compress failed: %s
+/root/hermes-agent-src/gateway/run.py|4533|Keep the introduction concise -- one or two sentences max.]
+/root/hermes-agent-src/gateway/run.py|4540|{platform_name.upper()}_HOME_CHANNEL
+/root/hermes-agent-src/gateway/run.py|4546|📬 Домашний канал для {platform_name.title()} не задан. 
+/root/hermes-agent-src/gateway/run.py|4547|Сюда Hermes доставляет результаты cron-задач 
+/root/hermes-agent-src/gateway/run.py|4548|и сообщения с других платформ.\n\n
+/root/hermes-agent-src/gateway/run.py|4549|Напиши /sethome чтобы назначить этот чат домашним, 
+/root/hermes-agent-src/gateway/run.py|4550|или проигнорируй это сообщение.
+/root/hermes-agent-src/gateway/run.py|4628|Discarding stale agent result for %s — generation %d is no longer current
+/root/hermes-agent-src/gateway/run.py|4638|_post_delivery_callbacks
+/root/hermes-agent-src/gateway/run.py|4651|⚠️ The model returned no response after processing tool 
+/root/hermes-agent-src/gateway/run.py|4652|results. This can happen with some models — try again or 
+/root/hermes-agent-src/gateway/run.py|4653|rephrase your question.
+/root/hermes-agent-src/gateway/run.py|4660|response ready: platform=%s chat=%s time=%.1fs api_calls=%d response=%d chars
+/root/hermes-agent-src/gateway/run.py|4702|Use /compact to compress the conversation, or 
+/root/hermes-agent-src/gateway/run.py|4707|The request failed: {str(error_detail)[:300]}\n
+/root/hermes-agent-src/gateway/run.py|4723|_show_reasoning
+/root/hermes-agent-src/gateway/run.py|4726|_show_reasoning
+/root/hermes-agent-src/gateway/run.py|4734|\n_... ({len(lines) - 15} more lines)_
+/root/hermes-agent-src/gateway/run.py|4752|Process watcher setup error: %s
+/root/hermes-agent-src/gateway/run.py|4773|Watch notification injection error: %s
+/root/hermes-agent-src/gateway/run.py|4775|Watch queue drain error: %s
+/root/hermes-agent-src/gateway/run.py|4796|Skipping transcript persistence for failed request in 
+/root/hermes-agent-src/gateway/run.py|4797|session %s to prevent session growth loop.
+/root/hermes-agent-src/gateway/run.py|4807|Auto-resetting session %s after compression exhaustion.
+/root/hermes-agent-src/gateway/run.py|4815|\n\n🔄 Session auto-reset — the conversation exceeded the 
+/root/hermes-agent-src/gateway/run.py|4816|maximum context size and could not be compressed further. 
+/root/hermes-agent-src/gateway/run.py|4817|Your next message will start a fresh session.
+/root/hermes-agent-src/gateway/run.py|4899|stop responding without explanation.
+/root/hermes-agent-src/gateway/run.py|4919|Agent error in session %s
+/root/hermes-agent-src/gateway/run.py|4928| Your API balance or quota is exhausted. Check your provider dashboard.
+/root/hermes-agent-src/gateway/run.py|4947| You are being rate-limited. Please wait a moment and try again.
+/root/hermes-agent-src/gateway/run.py|4949| The API is temporarily overloaded. Please try again shortly.
+/root/hermes-agent-src/gateway/run.py|4957|Use /compact to compress the conversation, or 
+/root/hermes-agent-src/gateway/run.py|4961| The request was rejected by the API.
+/root/hermes-agent-src/gateway/run.py|4963|Sorry, I encountered an error ({error_type}).\n
+/root/hermes-agent-src/gateway/run.py|5034|default — set model.context_length in config to override
+/root/hermes-agent-src/gateway/run.py|5053|127.0.0.1
+/root/hermes-agent-src/gateway/run.py|5053|0.0.0.0
+/root/hermes-agent-src/gateway/run.py|5073|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|5137|✨ Session reset! Starting fresh.
+/root/hermes-agent-src/gateway/run.py|5141|✨ New session started!
+/root/hermes-agent-src/gateway/run.py|5197|📊 **Статус Hermes Gateway**
+/root/hermes-agent-src/gateway/run.py|5199|**ID сессии:** `{session_entry.session_id}`
+/root/hermes-agent-src/gateway/run.py|5202|**Название:** {title}
+/root/hermes-agent-src/gateway/run.py|5206|**Токенов:** {session_entry.total_tokens:,}
+/root/hermes-agent-src/gateway/run.py|5207|Да ⚡
+/root/hermes-agent-src/gateway/run.py|5207|Нет
+/root/hermes-agent-src/gateway/run.py|5221|_running_agents
+/root/hermes-agent-src/gateway/run.py|5222|_running_agents_ts
+/root/hermes-agent-src/gateway/run.py|5251|_background_tasks
+/root/hermes-agent-src/gateway/run.py|5256|🤖 **Активные агенты и задачи**
+/root/hermes-agent-src/gateway/run.py|5258|**Активных агентов:** {len(agent_rows)}
+/root/hermes-agent-src/gateway/run.py|5263| · этот чат
+/root/hermes-agent-src/gateway/run.py|5271|... и ещё {len(agent_rows) - 12}
+/root/hermes-agent-src/gateway/run.py|5276|**Фоновые процессы:** {len(running_processes)}
+/root/hermes-agent-src/gateway/run.py|5283|...
+/root/hermes-agent-src/gateway/run.py|5289|... и ещё {len(running_processes) - 12}
+/root/hermes-agent-src/gateway/run.py|5294|**Фоновые задачи:** {len(background_tasks)}
+/root/hermes-agent-src/gateway/run.py|5300|Нет активных агентов или задач.
+/root/hermes-agent-src/gateway/run.py|5329|⚡ Остановлено. Агент еще не запустился — ты можешь продолжить эту сессию.
+/root/hermes-agent-src/gateway/run.py|5339|⚡ Остановлено. Можешь продолжить эту сессию.
+/root/hermes-agent-src/gateway/run.py|5341|Нет активной задачи для остановки.
+/root/hermes-agent-src/gateway/run.py|5358|Ignoring redelivered /restart (platform=%s, update_id=%s) — 
+/root/hermes-agent-src/gateway/run.py|5359|already processed by a previous gateway instance.
+/root/hermes-agent-src/gateway/run.py|5368|⏳ Завершаю {count} активных агент(ов) перед рестартом...
+/root/hermes-agent-src/gateway/run.py|5369|⏳ Рестарт шлюза уже идёт...
+/root/hermes-agent-src/gateway/run.py|5380|.restart_notify.json
+/root/hermes-agent-src/gateway/run.py|5384|Failed to write restart notify file: %s
+/root/hermes-agent-src/gateway/run.py|5398|.restart_last_processed.json
+/root/hermes-agent-src/gateway/run.py|5402|Failed to write restart dedup marker: %s
+/root/hermes-agent-src/gateway/run.py|5416|⏳ Draining {active_agents} active agent(s) before restart...
+/root/hermes-agent-src/gateway/run.py|5417|♻️ Перезапускаю шлюз. Если не отвечу в течение 60 секунд — перезапусти вручную: hermes gateway restart
+/root/hermes-agent-src/gateway/run.py|5447|.restart_last_processed.json
+/root/hermes-agent-src/gateway/run.py|5480|\n⚡ **Skill Commands** ({len(skill_cmds)} active):
+/root/hermes-agent-src/gateway/run.py|5500|Использование: `/commands [страница]`
+/root/hermes-agent-src/gateway/run.py|5511|⚡ **Команды скиллов**:
+/root/hermes-agent-src/gateway/run.py|5513|).strip() or 
+/root/hermes-agent-src/gateway/run.py|5519|Нет доступных команд.
+/root/hermes-agent-src/gateway/run.py|5529|📚 **Команды** ({len(entries)}, страница {page}/{total_pages})
+/root/hermes-agent-src/gateway/run.py|5541|_(Запрошенная страница {requested_page} вне диапазона, показана страница {page}.)_
+/root/hermes-agent-src/gateway/run.py|5649|Ошибка: {result.error_message}
+/root/hermes-agent-src/gateway/run.py|5653|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|5654|_agent_cache
+/root/hermes-agent-src/gateway/run.py|5668|Picker model switch failed for cached agent: %s
+/root/hermes-agent-src/gateway/run.py|5671|_pending_model_notes
+/root/hermes-agent-src/gateway/run.py|5674|[Note: model was just switched from {_cur_model} to {result.new_model} 
+/root/hermes-agent-src/gateway/run.py|5675|via {result.provider_label or result.target_provider}. 
+/root/hermes-agent-src/gateway/run.py|5676|Adjust your self-identification accordingly.]
+/root/hermes-agent-src/gateway/run.py|5693|Model switched to `{result.new_model}`
+/root/hermes-agent-src/gateway/run.py|5694|Provider: {plabel}
+/root/hermes-agent-src/gateway/run.py|5706|Context: {ctx:,} tokens
+/root/hermes-agent-src/gateway/run.py|5709|Max output: {mi.max_output:,} tokens
+/root/hermes-agent-src/gateway/run.py|5711|Cost: {mi.format_cost()}
+/root/hermes-agent-src/gateway/run.py|5712|Capabilities: {mi.format_capabilities()}
+/root/hermes-agent-src/gateway/run.py|5713|_(session only — use `/model <name> --global` to persist)_
+/root/hermes-agent-src/gateway/run.py|5773|Ошибка: {result.error_message}
+/root/hermes-agent-src/gateway/run.py|5777|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|5778|_agent_cache
+/root/hermes-agent-src/gateway/run.py|5793|In-place model switch failed for cached agent: %s
+/root/hermes-agent-src/gateway/run.py|5797|_pending_model_notes
+/root/hermes-agent-src/gateway/run.py|5800|[Note: model was just switched from {current_model} to {result.new_model} 
+/root/hermes-agent-src/gateway/run.py|5801|via {result.provider_label or result.target_provider}. 
+/root/hermes-agent-src/gateway/run.py|5802|Adjust your self-identification accordingly.]
+/root/hermes-agent-src/gateway/run.py|5834|Failed to persist model switch: %s
+/root/hermes-agent-src/gateway/run.py|5838|Model switched to `{result.new_model}`
+/root/hermes-agent-src/gateway/run.py|5839|Provider: {provider_label}
+/root/hermes-agent-src/gateway/run.py|5854|Context: {ctx:,} tokens
+/root/hermes-agent-src/gateway/run.py|5857|Max output: {mi.max_output:,} tokens
+/root/hermes-agent-src/gateway/run.py|5859|Cost: {mi.format_cost()}
+/root/hermes-agent-src/gateway/run.py|5860|Capabilities: {mi.format_capabilities()}
+/root/hermes-agent-src/gateway/run.py|5868|Prompt caching: enabled
+/root/hermes-agent-src/gateway/run.py|5871|Warning: {result.warning_message}
+/root/hermes-agent-src/gateway/run.py|5874|Saved to config.yaml (`--global`)
+/root/hermes-agent-src/gateway/run.py|5876|_(session only -- add `--global` to persist)_
+/root/hermes-agent-src/gateway/run.py|5904|🎭 **Available Personalities**\n
+/root/hermes-agent-src/gateway/run.py|5910|...
+/root/hermes-agent-src/gateway/run.py|5932|⚠️ Failed to save personality change: {e}
+/root/hermes-agent-src/gateway/run.py|5934|🎭 Личность очищена — используется базовое поведение агента.\n_(вступает в силу с следующего сообщения)_
+/root/hermes-agent-src/gateway/run.py|5945|⚠️ Failed to save personality change: {e}
+/root/hermes-agent-src/gateway/run.py|5950|🎭 Личность установлена на **{args}**\n_(вступает в силу со следующего сообщения)_
+/root/hermes-agent-src/gateway/run.py|5953|Unknown personality: `{args}`\n\nAvailable: {available}
+/root/hermes-agent-src/gateway/run.py|5971|Нет предыдущего сообщения для повторной попытки.
+/root/hermes-agent-src/gateway/run.py|6005|Нечего отменять.
+/root/hermes-agent-src/gateway/run.py|6013|...
+/root/hermes-agent-src/gateway/run.py|6014|↩️ Отменено {removed_count} сообщение(й).\nУдалено: \
+/root/hermes-agent-src/gateway/run.py|6023|{platform_name.upper()}_HOME_CHANNEL
+/root/hermes-agent-src/gateway/run.py|6038|Failed to save home channel: {e}
+/root/hermes-agent-src/gateway/run.py|6041|✅ Home channel set to **{chat_name}** (ID: {chat_id}).\n
+/root/hermes-agent-src/gateway/run.py|6042|Cron jobs and cross-platform messages will be delivered here.
+/root/hermes-agent-src/gateway/run.py|6047|Extract Discord guild_id from the raw message object.
+/root/hermes-agent-src/gateway/run.py|6074|Голосовой режим включён.\n
+/root/hermes-agent-src/gateway/run.py|6075|Буду отвечать голосом на голосовые сообщения.\n
+/root/hermes-agent-src/gateway/run.py|6083|Голосовой режим отключен. Ответы только текстом.
+/root/hermes-agent-src/gateway/run.py|6090|Авто-TTS включён.\n
+/root/hermes-agent-src/gateway/run.py|6091|Все ответы будут содержать голосовое сообщение.
+/root/hermes-agent-src/gateway/run.py|6100|Выкл (только текст)
+/root/hermes-agent-src/gateway/run.py|6101|Вкл (голосовой ответ на голосовые)
+/root/hermes-agent-src/gateway/run.py|6102|TTS (голосовой ответ на все)
+/root/hermes-agent-src/gateway/run.py|6111|Голосовой режим: {labels.get(mode, mode)}
+/root/hermes-agent-src/gateway/run.py|6116| (говорит)
+/root/hermes-agent-src/gateway/run.py|6119|Голосовой режим: {labels.get(mode, mode)}
+/root/hermes-agent-src/gateway/run.py|6128|Голосовой режим включен.
+/root/hermes-agent-src/gateway/run.py|6134|Голосовой режим отключен.
+/root/hermes-agent-src/gateway/run.py|6140|Голосовые каналы не поддерживаются на этой платформе.
+/root/hermes-agent-src/gateway/run.py|6144|Эта команда работает только на сервере Discord.
+/root/hermes-agent-src/gateway/run.py|6150|Сначала нужно быть в голосовом канале.
+/root/hermes-agent-src/gateway/run.py|6154|_voice_input_callback
+/root/hermes-agent-src/gateway/run.py|6156|_on_voice_disconnect
+/root/hermes-agent-src/gateway/run.py|6162|Failed to join voice channel: %s
+/root/hermes-agent-src/gateway/run.py|6168|Install with: `{sys.executable} -m pip install PyNaCl`
+/root/hermes-agent-src/gateway/run.py|6170|Failed to join voice channel: {e}
+/root/hermes-agent-src/gateway/run.py|6174|_voice_sources
+/root/hermes-agent-src/gateway/run.py|6180|Joined voice channel **{voice_channel.name}**.\n
+/root/hermes-agent-src/gateway/run.py|6185|Не удалось присоединиться к голосовому каналу. Проверьте разрешения бота (Подключение + Говорить).
+/root/hermes-agent-src/gateway/run.py|6188|Leave the Discord voice channel.
+/root/hermes-agent-src/gateway/run.py|6193|Не в голосовом канале.
+/root/hermes-agent-src/gateway/run.py|6196|Не в голосовом канале.
+/root/hermes-agent-src/gateway/run.py|6201|Error leaving voice channel: %s
+/root/hermes-agent-src/gateway/run.py|6206|_voice_input_callback
+/root/hermes-agent-src/gateway/run.py|6208|Покинул голосовой канал.
+/root/hermes-agent-src/gateway/run.py|6238|_voice_sources
+/root/hermes-agent-src/gateway/run.py|6254|Unauthorized voice input from user %d, ignoring
+/root/hermes-agent-src/gateway/run.py|6262|**[Voice]** <@{user_id}>: {safe_text}
+/root/hermes-agent-src/gateway/run.py|6334|Generate TTS audio and send as a voice message before the text reply.
+/root/hermes-agent-src/gateway/run.py|6349|tts_reply_{_uuid.uuid4().hex[:12]}.mp3
+/root/hermes-agent-src/gateway/run.py|6361|Auto voice reply TTS failed: %s
+/root/hermes-agent-src/gateway/run.py|6383|Auto voice reply failed: %s
+/root/hermes-agent-src/gateway/run.py|6412|.ogg
+/root/hermes-agent-src/gateway/run.py|6412|.opus
+/root/hermes-agent-src/gateway/run.py|6412|.mp3
+/root/hermes-agent-src/gateway/run.py|6412|.wav
+/root/hermes-agent-src/gateway/run.py|6412|.m4a
+/root/hermes-agent-src/gateway/run.py|6413|.mp4
+/root/hermes-agent-src/gateway/run.py|6413|.mov
+/root/hermes-agent-src/gateway/run.py|6413|.avi
+/root/hermes-agent-src/gateway/run.py|6413|.mkv
+/root/hermes-agent-src/gateway/run.py|6413|.webm
+/root/hermes-agent-src/gateway/run.py|6413|.3gp
+/root/hermes-agent-src/gateway/run.py|6414|.jpg
+/root/hermes-agent-src/gateway/run.py|6414|.jpeg
+/root/hermes-agent-src/gateway/run.py|6414|.png
+/root/hermes-agent-src/gateway/run.py|6414|.webp
+/root/hermes-agent-src/gateway/run.py|6414|.gif
+/root/hermes-agent-src/gateway/run.py|6465|Post-stream media extraction failed: %s
+/root/hermes-agent-src/gateway/run.py|6487|Checkpoints are not enabled.\n
+/root/hermes-agent-src/gateway/run.py|6488|Enable in config.yaml:\n```\ncheckpoints:\n  enabled: true\n```
+/root/hermes-agent-src/gateway/run.py|6506|No checkpoints found for {cwd}
+/root/hermes-agent-src/gateway/run.py|6514|Invalid checkpoint number. Use 1-{len(checkpoints)}.
+/root/hermes-agent-src/gateway/run.py|6522|A pre-rollback snapshot was saved automatically.
+/root/hermes-agent-src/gateway/run.py|6537|Example: /background Summarize the top HN stories today\n\n
+/root/hermes-agent-src/gateway/run.py|6538|Runs the prompt in a separate session. 
+/root/hermes-agent-src/gateway/run.py|6539|You can keep chatting — the result will appear here when done.
+/root/hermes-agent-src/gateway/run.py|6552|...
+/root/hermes-agent-src/gateway/run.py|6558|Execute a background agent task and deliver the result to the chat.
+/root/hermes-agent-src/gateway/run.py|6563|No adapter for platform %s in background task %s
+/root/hermes-agent-src/gateway/run.py|6577|❌ Background task {task_id} failed: no provider credentials configured.
+/root/hermes-agent-src/gateway/run.py|6641|...
+/root/hermes-agent-src/gateway/run.py|6678|...
+/root/hermes-agent-src/gateway/run.py|6686|Background task %s failed
+/root/hermes-agent-src/gateway/run.py|6690|❌ Background task {task_id} failed: {e}
+/root/hermes-agent-src/gateway/run.py|6720|Save a dot-separated key to config.yaml.
+/root/hermes-agent-src/gateway/run.py|6736|Failed to save config key %s: %s
+/root/hermes-agent-src/gateway/run.py|6749|_session_reasoning_overrides
+/root/hermes-agent-src/gateway/run.py|6752|🧠 **Reasoning Settings**\n\n
+/root/hermes-agent-src/gateway/run.py|6753|**Effort:** `{level}`\n
+/root/hermes-agent-src/gateway/run.py|6754|**Scope:** {scope}\n
+/root/hermes-agent-src/gateway/run.py|6755|**Display:** {display_state}\n\n
+/root/hermes-agent-src/gateway/run.py|6756|_Usage:_ `/reasoning <none|minimal|low|medium|high|xhigh|reset|show|hide> [--global]`
+/root/hermes-agent-src/gateway/run.py|6765|🧠 ✓ Reasoning display: **ON**\n
+/root/hermes-agent-src/gateway/run.py|6766|Model thinking will be shown before each response on **{platform_key}**.
+/root/hermes-agent-src/gateway/run.py|6772|🧠 ✓ Отображение рассуждений: **ВЫКЛ** для **{platform_key}**
+/root/hermes-agent-src/gateway/run.py|6782|🧠 ✓ Переопределение рассуждений сессии очищено; возвращение к глобальной конфигурации.
+/root/hermes-agent-src/gateway/run.py|6789|⚠️ Unknown argument: `{effort or raw_args.lower()}`\n\n
+/root/hermes-agent-src/gateway/run.py|6790|**Valid levels:** none, minimal, low, medium, high, xhigh\n
+/root/hermes-agent-src/gateway/run.py|6791|**Display:** show, hide\n
+/root/hermes-agent-src/gateway/run.py|6792|**Persist:** add `--global` to save beyond this session
+/root/hermes-agent-src/gateway/run.py|6800|🧠 ✓ Усилие рассуждений установлено на `{effort}` (сохранено в конфигурации)\n_(вступает в силу со следующего сообщения)_
+/root/hermes-agent-src/gateway/run.py|6803|🧠 ✓ Усилие рассуждений установлено на `{effort}` (только сессия — сохранение конфига не удалось)\n_(вступает в силу со следующего сообщения)_
+/root/hermes-agent-src/gateway/run.py|6807|🧠 ✓ Усилие рассуждений установлено на `{effort}` (только сессия — добавь `--global` для сохранения)\n_(вступает в силу со следующего сообщения)_
+/root/hermes-agent-src/gateway/run.py|6824|Save a dot-separated key to config.yaml.
+/root/hermes-agent-src/gateway/run.py|6840|Failed to save config key %s: %s
+/root/hermes-agent-src/gateway/run.py|6846|⚡ Priority Processing\n\n
+/root/hermes-agent-src/gateway/run.py|6847|Current mode: `{status}`\n\n
+/root/hermes-agent-src/gateway/run.py|6848|_Usage:_ `/fast <normal|fast|status>`
+/root/hermes-agent-src/gateway/run.py|6861|⚠️ Unknown argument: `{args}`\n\n
+/root/hermes-agent-src/gateway/run.py|6862|**Valid options:** normal, fast, status
+/root/hermes-agent-src/gateway/run.py|6866|⚡ ✓ Приоритетная обработка: **{label}** (сохранено в конфигурации)\n_(вступает в силу со следующего сообщения)_
+/root/hermes-agent-src/gateway/run.py|6867|⚡ ✓ Приоритетная обработка: **{label}** (только эта сессия)
+/root/hermes-agent-src/gateway/run.py|6881|⚠️ Режим YOLO **ВЫКЛ** для этой сессии — опасные команды потребуют одобрения.
+/root/hermes-agent-src/gateway/run.py|6884|⚡ Режим YOLO **ВКЛ** для этой сессии — все команды автоматически одобрены. Используйте с осторожностью.
+/root/hermes-agent-src/gateway/run.py|6913|Enable it in `config.yaml`:\n```yaml\n
+/root/hermes-agent-src/gateway/run.py|6920|⚙️ Tool progress: **OFF** — no tool activity shown.
+/root/hermes-agent-src/gateway/run.py|6921|⚙️ Tool progress: **NEW** — shown when tool changes (preview length: `display.tool_preview_length`, default 40).
+/root/hermes-agent-src/gateway/run.py|6922|⚙️ Tool progress: **ALL** — every tool call shown (preview length: `display.tool_preview_length`, default 40).
+/root/hermes-agent-src/gateway/run.py|6923|⚙️ Tool progress: **VERBOSE** — every tool call with full arguments.
+/root/hermes-agent-src/gateway/run.py|6947|_(saved for **{platform_key}** — takes effect on next message)_
+/root/hermes-agent-src/gateway/run.py|6950|Failed to save tool_progress mode: %s
+/root/hermes-agent-src/gateway/run.py|6965|Недостаточно разговора для сжатия (нужно как минимум 4 сообщения).
+/root/hermes-agent-src/gateway/run.py|6981|Поставщик не настроен — не могу сжать.
+/root/hermes-agent-src/gateway/run.py|7005|Нечего сжимать пока (транскрипция все еще защищена).
+/root/hermes-agent-src/gateway/run.py|7038|Focus: \
+/root/hermes-agent-src/gateway/run.py|7044|Manual compress failed: %s
+/root/hermes-agent-src/gateway/run.py|7045|Compression failed: {e}
+/root/hermes-agent-src/gateway/run.py|7054|База данных сессий недоступна.
+/root/hermes-agent-src/gateway/run.py|7076|⚠️ {e}
+/root/hermes-agent-src/gateway/run.py|7078|⚠️ Заголовок пуст после очистки. Пожалуйста, используйте печатные символы.
+/root/hermes-agent-src/gateway/run.py|7082|✏️ Заголовок сессии установлен: **{sanitized}**
+/root/hermes-agent-src/gateway/run.py|7084|Сессия не найдена в базе данных.
+/root/hermes-agent-src/gateway/run.py|7086|⚠️ {e}
+/root/hermes-agent-src/gateway/run.py|7091|📌 Сессия: `{session_id}`\nЗаголовок: **{title}**
+/root/hermes-agent-src/gateway/run.py|7098|База данных сессий недоступна.
+/root/hermes-agent-src/gateway/run.py|7114|No named sessions found.\n
+/root/hermes-agent-src/gateway/run.py|7115|Use `/title My Session` to name your current session, 
+/root/hermes-agent-src/gateway/run.py|7127|Failed to list titled sessions: %s
+/root/hermes-agent-src/gateway/run.py|7128|Не удалось получить список сессий: {e}
+/root/hermes-agent-src/gateway/run.py|7134|**{name}**
+/root/hermes-agent-src/gateway/run.py|7142|Failed to resolve resume continuation for %s: %s
+/root/hermes-agent-src/gateway/run.py|7147|📌 Уже в сессии **{name}**.
+/root/hermes-agent-src/gateway/run.py|7155|Не удалось переключить сессию.
+/root/hermes-agent-src/gateway/run.py|7166|↻ Сессия **{title}** восстановлена{msg_part}. Диалог возобновлён.
+/root/hermes-agent-src/gateway/run.py|7178|База данных сессий недоступна.
+/root/hermes-agent-src/gateway/run.py|7187|Нет разговора для ветвления — сначала отправьте сообщение.
+/root/hermes-agent-src/gateway/run.py|7217|Failed to create branch session: %s
+/root/hermes-agent-src/gateway/run.py|7218|Failed to create branch: {e}
+/root/hermes-agent-src/gateway/run.py|7245|Ветка создана, но не удалось переключиться на нее.
+/root/hermes-agent-src/gateway/run.py|7255|Original: `{parent_session_id}`\n
+/root/hermes-agent-src/gateway/run.py|7256|Branch: `{new_session_id}`\n
+/root/hermes-agent-src/gateway/run.py|7273|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|7274|_agent_cache
+/root/hermes-agent-src/gateway/run.py|7288|_session_db
+/root/hermes-agent-src/gateway/run.py|7329|📊 **Использование токенов сессии**
+/root/hermes-agent-src/gateway/run.py|7330|Модель: `{agent.model}`
+/root/hermes-agent-src/gateway/run.py|7331|Входные токены: {input_tokens:,}
+/root/hermes-agent-src/gateway/run.py|7333|Кэш чтение: {cache_read:,}
+/root/hermes-agent-src/gateway/run.py|7335|Кэш запись: {cache_write:,}
+/root/hermes-agent-src/gateway/run.py|7336|Выходные токены: {output_tokens:,}
+/root/hermes-agent-src/gateway/run.py|7337|Всего: {agent.session_total_tokens:,}
+/root/hermes-agent-src/gateway/run.py|7338|API вызовов: {agent.session_api_calls}
+/root/hermes-agent-src/gateway/run.py|7356|Стоимость: {prefix}${float(cost_result.amount_usd):.4f}
+/root/hermes-agent-src/gateway/run.py|7358|Стоимость: включено
+/root/hermes-agent-src/gateway/run.py|7368|Сжатий: {ctx.compression_count}
+/root/hermes-agent-src/gateway/run.py|7384|📊 **Инфо сессии**
+/root/hermes-agent-src/gateway/run.py|7385|Сообщений: {len(msgs)}
+/root/hermes-agent-src/gateway/run.py|7386|Примерный контекст: ~{approx:,} токенов
+/root/hermes-agent-src/gateway/run.py|7387|_(Подробная статистика появится после первого ответа)_
+/root/hermes-agent-src/gateway/run.py|7395|Нет данных о использовании для этой сессии.
+/root/hermes-agent-src/gateway/run.py|7416|Invalid --days value: {parts[i + 1]}
+/root/hermes-agent-src/gateway/run.py|7443|Insights command error: %s
+/root/hermes-agent-src/gateway/run.py|7444|Ошибка генерации инсайтов: {e}
+/root/hermes-agent-src/gateway/run.py|7471|🔄 **MCP Servers Reloaded**\n
+/root/hermes-agent-src/gateway/run.py|7479|No MCP servers connected.
+/root/hermes-agent-src/gateway/run.py|7493|No MCP tools available
+/root/hermes-agent-src/gateway/run.py|7497|[IMPORTANT: MCP servers have been reloaded. {change_detail}{tool_summary}. The tool list for this conversation has been updated accordingly.]
+/root/hermes-agent-src/gateway/run.py|7511|❌ MCP reload failed: {e}
+/root/hermes-agent-src/gateway/run.py|7549|⚠️ Одобрение истекло (агент больше не ждет). Попросите агента попробовать снова.
+/root/hermes-agent-src/gateway/run.py|7550|Нет ожидающей команды для одобрения.
+/root/hermes-agent-src/gateway/run.py|7569|Нет ожидающей команды для одобрения.
+/root/hermes-agent-src/gateway/run.py|7577|User approved %d dangerous command(s) via /approve%s
+/root/hermes-agent-src/gateway/run.py|7598|❌ Команда отклонена (одобрение устарело).
+/root/hermes-agent-src/gateway/run.py|7599|Нет ожидающей команды для отклонения.
+/root/hermes-agent-src/gateway/run.py|7606|Нет ожидающей команды для отклонения.
+/root/hermes-agent-src/gateway/run.py|7614|User denied %d dangerous command(s) via /deny
+/root/hermes-agent-src/gateway/run.py|7652|✗ Failed to upload debug report: {exc}
+/root/hermes-agent-src/gateway/run.py|7663|⏱ Pastes will auto-delete in 6 hours.
+/root/hermes-agent-src/gateway/run.py|7664|For full log uploads, use `hermes debug share` from the CLI.
+/root/hermes-agent-src/gateway/run.py|7665|Share these links with the Hermes team for support.
+/root/hermes-agent-src/gateway/run.py|7690|обновление Hermes
+/root/hermes-agent-src/gateway/run.py|7693|.git
+/root/hermes-agent-src/gateway/run.py|7696|✗ Не репозиторий git — не могу обновить.
+/root/hermes-agent-src/gateway/run.py|7701|✗ Could not locate the `hermes` command. 
+/root/hermes-agent-src/gateway/run.py|7702|Hermes is running, but the update command could not find the 
+/root/hermes-agent-src/gateway/run.py|7703|executable on PATH or via the current Python interpreter. 
+/root/hermes-agent-src/gateway/run.py|7704|Try running `hermes update` manually in your terminal.
+/root/hermes-agent-src/gateway/run.py|7707|.update_pending.json
+/root/hermes-agent-src/gateway/run.py|7708|.update_output.txt
+/root/hermes-agent-src/gateway/run.py|7709|.update_exit_code
+/root/hermes-agent-src/gateway/run.py|7718|.tmp
+/root/hermes-agent-src/gateway/run.py|7734| > {shlex.quote(str(output_path))} 2>&1; 
+/root/hermes-agent-src/gateway/run.py|7758|✗ Failed to start update: {e}
+/root/hermes-agent-src/gateway/run.py|7761|⚕ Запуск обновления Hermes… Я буду транслировать прогресс здесь.
+/root/hermes-agent-src/gateway/run.py|7764|Ensure a background task is watching for update completion.
+/root/hermes-agent-src/gateway/run.py|7765|_update_notification_task
+/root/hermes-agent-src/gateway/run.py|7774|Skipping update notification watcher: no running event loop
+/root/hermes-agent-src/gateway/run.py|7790|.update_pending.json
+/root/hermes-agent-src/gateway/run.py|7791|.update_pending.claimed.json
+/root/hermes-agent-src/gateway/run.py|7792|.update_output.txt
+/root/hermes-agent-src/gateway/run.py|7793|.update_exit_code
+/root/hermes-agent-src/gateway/run.py|7794|.update_prompt.json
+/root/hermes-agent-src/gateway/run.py|7821|Update watcher: cannot resolve adapter/chat_id, falling back to completion-only
+/root/hermes-agent-src/gateway/run.py|7841|Send buffered output to the user.
+/root/hermes-agent-src/gateway/run.py|7859|Update stream send failed: %s
+/root/hermes-agent-src/gateway/run.py|7880|✅ Обновление Hermes завершено.
+/root/hermes-agent-src/gateway/run.py|7882|❌ Hermes update failed (exit code {}).
+/root/hermes-agent-src/gateway/run.py|7883|Update finished (exit=%s), notified %s
+/root/hermes-agent-src/gateway/run.py|7885|Update final notification failed: %s
+/root/hermes-agent-src/gateway/run.py|7891|.update_response
+/root/hermes-agent-src/gateway/run.py|7935|Button-based update prompt failed: %s
+/root/hermes-agent-src/gateway/run.py|7942|Reply `/approve` (yes) or `/deny` (no), 
+/root/hermes-agent-src/gateway/run.py|7943|or type your answer directly.
+/root/hermes-agent-src/gateway/run.py|7951|Forwarded update prompt to %s: %s
+/root/hermes-agent-src/gateway/run.py|7953|Failed to read update prompt: %s
+/root/hermes-agent-src/gateway/run.py|7959|Update watcher timed out after %.0fs
+/root/hermes-agent-src/gateway/run.py|7963|❌ Обновление Hermes истекло через 30 минут.
+/root/hermes-agent-src/gateway/run.py|7969|.update_response
+/root/hermes-agent-src/gateway/run.py|7982|.update_pending.json
+/root/hermes-agent-src/gateway/run.py|7983|.update_pending.claimed.json
+/root/hermes-agent-src/gateway/run.py|7984|.update_output.txt
+/root/hermes-agent-src/gateway/run.py|7985|.update_exit_code
+/root/hermes-agent-src/gateway/run.py|8007|Update notification deferred: update still running
+/root/hermes-agent-src/gateway/run.py|8032|✅ Hermes update finished.\n\n```\n{output}\n```
+/root/hermes-agent-src/gateway/run.py|8034|❌ Hermes update failed.\n\n```\n{output}\n```
+/root/hermes-agent-src/gateway/run.py|8037|✅ Hermes update finished successfully.
+/root/hermes-agent-src/gateway/run.py|8039|❌ Hermes update failed. Check the gateway logs or run `hermes update` manually for details.
+/root/hermes-agent-src/gateway/run.py|8042|Sent post-update notification to %s:%s (exit=%s)
+/root/hermes-agent-src/gateway/run.py|8048|Post-update notification failed: %s
+/root/hermes-agent-src/gateway/run.py|8060|.restart_notify.json
+/root/hermes-agent-src/gateway/run.py|8077|Restart notification skipped: %s adapter not connected
+/root/hermes-agent-src/gateway/run.py|8085|♻️ Шлюз успешно перезапущен. Сессия продолжается.
+/root/hermes-agent-src/gateway/run.py|8089|Sent restart notification to %s:%s
+/root/hermes-agent-src/gateway/run.py|8094|Restart notification failed: %s
+/root/hermes-agent-src/gateway/run.py|8119|Restore session context variables to their pre-handler values.
+/root/hermes-agent-src/gateway/run.py|8153|Describe everything visible in this image in thorough detail. 
+/root/hermes-agent-src/gateway/run.py|8154|Include any text, code, data, objects, people, layout, colors, 
+/root/hermes-agent-src/gateway/run.py|8155|and any other notable visual information.
+/root/hermes-agent-src/gateway/run.py|8161|Auto-analyzing user image: %s
+/root/hermes-agent-src/gateway/run.py|8181|Vision auto-analysis error: %s
+/root/hermes-agent-src/gateway/run.py|8213|[The user sent voice message(s), but transcription is disabled in config.
+/root/hermes-agent-src/gateway/run.py|8216| You have a skill called hermes-agent-setup that can help 
+/root/hermes-agent-src/gateway/run.py|8217|users configure Hermes features including voice, tools, and more.
+/root/hermes-agent-src/gateway/run.py|8229|Transcribing user voice: %s
+/root/hermes-agent-src/gateway/run.py|8240|No STT provider
+/root/hermes-agent-src/gateway/run.py|8245|to it right now — no STT provider is configured. 
+/root/hermes-agent-src/gateway/run.py|8247|with setup instructions.
+/root/hermes-agent-src/gateway/run.py|8251| You have a skill called hermes-agent-setup 
+/root/hermes-agent-src/gateway/run.py|8253|including voice, tools, and more.
+/root/hermes-agent-src/gateway/run.py|8263|Transcription error: %s
+/root/hermes-agent-src/gateway/run.py|8266|when I tried to listen to it~ Let them know!]
+/root/hermes-agent-src/gateway/run.py|8303|Synthetic process-event session-store lookup failed for %s: %s
+/root/hermes-agent-src/gateway/run.py|8324|Synthetic process event has invalid platform metadata: %r
+/root/hermes-agent-src/gateway/run.py|8347|Dropping watch notification with no routing metadata for process %s
+/root/hermes-agent-src/gateway/run.py|8367|Watch pattern notification — injecting for %s chat=%s thread=%s
+/root/hermes-agent-src/gateway/run.py|8374|Watch notification injection error: %s
+/root/hermes-agent-src/gateway/run.py|8402|Process watcher started: %s (every %ss, notify=%s, agent_notify=%s)
+/root/hermes-agent-src/gateway/run.py|8413|Process watcher ended (silent): %s
+/root/hermes-agent-src/gateway/run.py|8437|(exit code {session.exit_code}).\n
+/root/hermes-agent-src/gateway/run.py|8438|Command: {session.command}\n
+/root/hermes-agent-src/gateway/run.py|8452|Dropping completion notification with no routing metadata for process %s
+/root/hermes-agent-src/gateway/run.py|8471|Process %s finished — injecting agent notification for session %s chat=%s thread=%s
+/root/hermes-agent-src/gateway/run.py|8479|Agent notify injection error: %s
+/root/hermes-agent-src/gateway/run.py|8491|[Background process {session_id} finished with exit code {session.exit_code}~ 
+/root/hermes-agent-src/gateway/run.py|8504|Watcher delivery error: %s
+/root/hermes-agent-src/gateway/run.py|8513|New output:\n{new_output}]
+/root/hermes-agent-src/gateway/run.py|8525|Watcher delivery error: %s
+/root/hermes-agent-src/gateway/run.py|8527|Process watcher ended: %s
+/root/hermes-agent-src/gateway/run.py|8634|_busy_ack_ts
+/root/hermes-agent-src/gateway/run.py|8639|Clear approval state that must not survive a real conversation switch.
+/root/hermes-agent-src/gateway/run.py|8643|_pending_approvals
+/root/hermes-agent-src/gateway/run.py|8656|Failed to clear approval state for session boundary %s: %s
+/root/hermes-agent-src/gateway/run.py|8671|_session_run_generation
+/root/hermes-agent-src/gateway/run.py|8680|Invalidate any in-flight run token for ``session_key``.
+/root/hermes-agent-src/gateway/run.py|8684|Invalidated run generation for %s → %d (%s)
+/root/hermes-agent-src/gateway/run.py|8692|Return True when ``generation`` is still current for ``session_key``.
+/root/hermes-agent-src/gateway/run.py|8695|_session_run_generation
+/root/hermes-agent-src/gateway/run.py|8708|_active_sessions
+/root/hermes-agent-src/gateway/run.py|8710|_hermes_run_generation
+/root/hermes-agent-src/gateway/run.py|8723|Interrupt the current run and clear queued session state consistently.
+/root/hermes-agent-src/gateway/run.py|8741|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|8802|_agent_cache
+/root/hermes-agent-src/gateway/run.py|8815|_running_agents
+/root/hermes-agent-src/gateway/run.py|8845|Agent cache over cap (%d > %d); %d excess slot(s) held by 
+/root/hermes-agent-src/gateway/run.py|8846|mid-turn agents — will re-check on next insert.
+/root/hermes-agent-src/gateway/run.py|8852|Agent cache at cap; evicting LRU session=%s (cache_size=%d)
+/root/hermes-agent-src/gateway/run.py|8874|_agent_cache
+/root/hermes-agent-src/gateway/run.py|8875|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|8882|_running_agents
+/root/hermes-agent-src/gateway/run.py|8892|_last_activity_ts
+/root/hermes-agent-src/gateway/run.py|8901|Agent cache idle-TTL evict: session=%s (idle=%.0fs)
+/root/hermes-agent-src/gateway/run.py|8902|_last_activity_ts
+/root/hermes-agent-src/gateway/run.py|8958|⚠️ Proxy mode requires aiohttp. Install with: pip install aiohttp
+/root/hermes-agent-src/gateway/run.py|9007|Bearer {proxy_key}
+/root/hermes-agent-src/gateway/run.py|9065|Proxy: could not set up stream consumer: %s
+/root/hermes-agent-src/gateway/run.py|9095|Proxy error (%d) from %s: %s
+/root/hermes-agent-src/gateway/run.py|9099|⚠️ Proxy error ({resp.status}): {error_text[:300]}
+/root/hermes-agent-src/gateway/run.py|9110|Discarding stale proxy stream for %s — generation %d is no longer current
+/root/hermes-agent-src/gateway/run.py|9152|Proxy connection error to %s: %s
+/root/hermes-agent-src/gateway/run.py|9155|⚠️ Proxy connection error: {e}
+/root/hermes-agent-src/gateway/run.py|9174|Discarding stale proxy result for %s — generation %d is no longer current
+/root/hermes-agent-src/gateway/run.py|9188|proxy response: url=%s session=%s time=%.1fs response=%d chars
+/root/hermes-agent-src/gateway/run.py|9309|Callback invoked by agent on tool lifecycle events.
+/root/hermes-agent-src/gateway/run.py|9315|терминал
+/root/hermes-agent-src/gateway/run.py|9316|браузер
+/root/hermes-agent-src/gateway/run.py|9317|читаю
+/root/hermes-agent-src/gateway/run.py|9318|пишу
+/root/hermes-agent-src/gateway/run.py|9319|патчу
+/root/hermes-agent-src/gateway/run.py|9320|ищу
+/root/hermes-agent-src/gateway/run.py|9321|анализирую
+/root/hermes-agent-src/gateway/run.py|9322|голос
+/root/hermes-agent-src/gateway/run.py|9323|код
+/root/hermes-agent-src/gateway/run.py|9324|делегирую
+/root/hermes-agent-src/gateway/run.py|9325|поиск сессий
+/root/hermes-agent-src/gateway/run.py|9326|скилл
+/root/hermes-agent-src/gateway/run.py|9327|управление скиллом
+/root/hermes-agent-src/gateway/run.py|9328|крон
+/root/hermes-agent-src/gateway/run.py|9329|отправляю
+/root/hermes-agent-src/gateway/run.py|9330|память
+/root/hermes-agent-src/gateway/run.py|9331|читаю память
+/root/hermes-agent-src/gateway/run.py|9332|обновляю память
+/root/hermes-agent-src/gateway/run.py|9333|открываю
+/root/hermes-agent-src/gateway/run.py|9334|кликаю
+/root/hermes-agent-src/gateway/run.py|9335|ввожу
+/root/hermes-agent-src/gateway/run.py|9336|прокручиваю
+/root/hermes-agent-src/gateway/run.py|9337|снимок
+/root/hermes-agent-src/gateway/run.py|9338|снимок страницы
+/root/hermes-agent-src/gateway/run.py|9339|консоль
+/root/hermes-agent-src/gateway/run.py|9340|изображения
+/root/hermes-agent-src/gateway/run.py|9341|назад
+/root/hermes-agent-src/gateway/run.py|9342|нажимаю
+/root/hermes-agent-src/gateway/run.py|9343|процесс
+/root/hermes-agent-src/gateway/run.py|9344|задачи
+/root/hermes-agent-src/gateway/run.py|9345|уточняю
+/root/hermes-agent-src/gateway/run.py|9346|патчу
+/root/hermes-agent-src/gateway/run.py|9415|...
+/root/hermes-agent-src/gateway/run.py|9416|{emoji} {tool_label}({list(args.keys())})\n{args_str}
+/root/hermes-agent-src/gateway/run.py|9420|{emoji} {tool_label}...
+/root/hermes-agent-src/gateway/run.py|9432|...
+/root/hermes-agent-src/gateway/run.py|9435|{emoji} {tool_label}...
+/root/hermes-agent-src/gateway/run.py|9610|Progress message error: %s
+/root/hermes-agent-src/gateway/run.py|9720|⚠️ Provider authentication failed: {exc}
+/root/hermes-agent-src/gateway/run.py|9795|Could not set up stream consumer: %s
+/root/hermes-agent-src/gateway/run.py|9832|_agent_cache_lock
+/root/hermes-agent-src/gateway/run.py|9833|_agent_cache
+/root/hermes-agent-src/gateway/run.py|9847|Reusing cached agent for session %s
+/root/hermes-agent-src/gateway/run.py|9885|Created new agent for session %s (sig=%s)
+/root/hermes-agent-src/gateway/run.py|9925|💾 Memory updated
+/root/hermes-agent-src/gateway/run.py|9947|_post_delivery_callbacks
+/root/hermes-agent-src/gateway/run.py|10044|is thinking...
+/root/hermes-agent-src/gateway/run.py|10071|Button-based approval failed (send returned error), falling back to text: %s
+/root/hermes-agent-src/gateway/run.py|10076|Button-based approval failed, falling back to text: %s
+/root/hermes-agent-src/gateway/run.py|10080|...
+/root/hermes-agent-src/gateway/run.py|10082|⚠️ **Dangerous command requires approval:**\n
+/root/hermes-agent-src/gateway/run.py|10084|Reason: {desc}\n\n
+/root/hermes-agent-src/gateway/run.py|10085|Reply `/approve` to execute, `/approve session` to approve this pattern 
+/root/hermes-agent-src/gateway/run.py|10098|Failed to send approval request: %s
+/root/hermes-agent-src/gateway/run.py|10101|_pending_model_notes
+/root/hermes-agent-src/gateway/run.py|10138|by {_reason_phrase}. The conversation history below is intact. 
+/root/hermes-agent-src/gateway/run.py|10139|If it contains unfinished tool result(s), process them first and 
+/root/hermes-agent-src/gateway/run.py|10141|message below.]\n\n
+/root/hermes-agent-src/gateway/run.py|10147|process the last tool result(s). The conversation history contains 
+/root/hermes-agent-src/gateway/run.py|10183| if result.get(
+/root/hermes-agent-src/gateway/run.py|10242|Session split detected: %s → %s (compression)
+/root/hermes-agent-src/gateway/run.py|10299|Wait for the stream consumer to be created, then run it.
+/root/hermes-agent-src/gateway/run.py|10324|Skipping stale agent promotion for %s — generation %s is no longer current
+/root/hermes-agent-src/gateway/run.py|10372|Interrupt detected from adapter, signaling agent...
+/root/hermes-agent-src/gateway/run.py|10418|⏳ Все ещё работаю... ({_elapsed_mins} мин{_status_detail})
+/root/hermes-agent-src/gateway/run.py|10422|Long-running notification error: %s
+/root/hermes-agent-src/gateway/run.py|10470|Backup interrupt detected for session %s 
+/root/hermes-agent-src/gateway/run.py|10509|⚠️ No activity for {_elapsed_warn} min. 
+/root/hermes-agent-src/gateway/run.py|10510|If the agent does not respond soon, it will 
+/root/hermes-agent-src/gateway/run.py|10511|be timed out in {_remaining_mins} min. 
+/root/hermes-agent-src/gateway/run.py|10516|Inactivity warning send error: %s
+/root/hermes-agent-src/gateway/run.py|10530|Backup interrupt detected for session %s 
+/root/hermes-agent-src/gateway/run.py|10555|Agent idle for %.0fs (timeout %.0fs) in session %s 
+/root/hermes-agent-src/gateway/run.py|10572|or API responses.
+/root/hermes-agent-src/gateway/run.py|10576|Агент похоже завис на инструменте `{_cur_tool}` 
+/root/hermes-agent-src/gateway/run.py|10577|({_secs_ago:.0f}с с последней активности, 
+/root/hermes-agent-src/gateway/run.py|10582|Последняя активность: {_last_desc} ({_secs_ago:.0f}с назад, 
+/root/hermes-agent-src/gateway/run.py|10584|Возможно агент ждал ответ от API.
+/root/hermes-agent-src/gateway/run.py|10587|To increase the limit, set agent.gateway_timeout in config.yaml 
+/root/hermes-agent-src/gateway/run.py|10588|(value in seconds, 0 = no limit) and restart the gateway.\n
+/root/hermes-agent-src/gateway/run.py|10633|Ignoring control interrupt message for session %s: %s
+/root/hermes-agent-src/gateway/run.py|10641|%s...
+/root/hermes-agent-src/gateway/run.py|10651|%s...
+/root/hermes-agent-src/gateway/run.py|10677|Discarding pending follow-up for session %s during gateway %s
+/root/hermes-agent-src/gateway/run.py|10685|%s...
+/root/hermes-agent-src/gateway/run.py|10690|_active_sessions
+/root/hermes-agent-src/gateway/run.py|10697|Interrupt recursion depth %d reached for session %s — 
+/root/hermes-agent-src/gateway/run.py|10698|queueing message instead of recursing.
+/root/hermes-agent-src/gateway/run.py|10724|Stream consumer wait before queued message failed: %s
+/root/hermes-agent-src/gateway/run.py|10734|Queued follow-up for session %s: final stream delivery not confirmed; sending first response before continuing.
+/root/hermes-agent-src/gateway/run.py|10743|Failed to send first response before queued message: %s
+/root/hermes-agent-src/gateway/run.py|10746|Queued follow-up for session %s: skipping resend because final streamed delivery was confirmed.
+/root/hermes-agent-src/gateway/run.py|10763|_post_delivery_callbacks
+/root/hermes-agent-src/gateway/run.py|10865|Let me search for that…
+/root/hermes-agent-src/gateway/run.py|10881|Suppressing normal final send for session %s: final delivery already confirmed (streamed=%s previewed=%s).
+/root/hermes-agent-src/gateway/run.py|10910|Cron ticker started (interval=%ds)
+/root/hermes-agent-src/gateway/run.py|10916|Cron tick error: %s
+/root/hermes-agent-src/gateway/run.py|10925|Channel directory refresh error: %s
+/root/hermes-agent-src/gateway/run.py|10931|Image cache cleanup: removed %d stale file(s)
+/root/hermes-agent-src/gateway/run.py|10933|Image cache cleanup error: %s
+/root/hermes-agent-src/gateway/run.py|10937|Document cache cleanup: removed %d stale file(s)
+/root/hermes-agent-src/gateway/run.py|10939|Document cache cleanup error: %s
+/root/hermes-agent-src/gateway/run.py|10942|Cron ticker stopped
+/root/hermes-agent-src/gateway/run.py|10977|Replacing existing gateway instance (PID %d) with --replace.
+/root/hermes-agent-src/gateway/run.py|10989|Could not write takeover marker: %s
+/root/hermes-agent-src/gateway/run.py|10996|Permission denied killing PID %d. Cannot replace.
+/root/hermes-agent-src/gateway/run.py|11017|Old gateway (PID %d) did not exit after SIGTERM, sending SIGKILL.
+/root/hermes-agent-src/gateway/run.py|11049|Released %d stale scoped lock(s) from old gateway.
+/root/hermes-agent-src/gateway/run.py|11060|\n❌ Gateway already running (PID {existing_pid}).\n
+/root/hermes-agent-src/gateway/run.py|11121|Takeover marker check failed: %s
+/root/hermes-agent-src/gateway/run.py|11125|Received SIGTERM as a planned --replace takeover — exiting cleanly
+/root/hermes-agent-src/gateway/run.py|11129|Received SIGTERM/SIGINT — initiating shutdown
+/root/hermes-agent-src/gateway/run.py|11146|Shutdown diagnostic — other hermes processes running:\n  %s
+/root/hermes-agent-src/gateway/run.py|11150|Shutdown diagnostic — no other hermes processes found
+/root/hermes-agent-src/gateway/run.py|11171|Skipping signal handlers (not running in main thread).
+/root/hermes-agent-src/gateway/run.py|11184|Another gateway instance (PID %d) started during our startup. 
+/root/hermes-agent-src/gateway/run.py|11185|Exiting to avoid double-running.
+/root/hermes-agent-src/gateway/run.py|11190|Gateway runtime lock is already held by another instance. Exiting.
+/root/hermes-agent-src/gateway/run.py|11198|PID file race lost to another gateway instance. Exiting.
+/root/hermes-agent-src/gateway/run.py|11210|Gateway exiting cleanly: %s
+/root/hermes-agent-src/gateway/run.py|11230|Gateway exiting with failure: %s
+/root/hermes-agent-src/gateway/run.py|11257|Exiting with code 1 (signal-initiated shutdown without restart 
+/root/hermes-agent-src/gateway/run.py|11258|request) so systemd Restart=on-failure can revive the gateway.
+/root/hermes-agent-src/gateway/run.py|11266|CLI entry point for the gateway.
+/root/hermes-agent-src/gateway/run.py|11269|Hermes Gateway - Multi-platform messaging
+/root/hermes-agent-src/gateway/run.py|11270|Path to gateway config file
+/root/hermes-agent-src/gateway/run.py|11271|Verbose output

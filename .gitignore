@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+found_strings.txt
+to_translate.txt
+translated_batch.txt
+debug_*.txt
+backups/

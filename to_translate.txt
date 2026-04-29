@@ -1,0 +1,28 @@
+1723|Your current task will be interrupted.
+1726|Your current task will be interrupted.
+2748|✗ %s background-task cancel error: %s
+3296|Please try again later!
+4651|⚠️ The model returned no response after processing tool results. This can happen with some models — try again or
+4653|rephrase your question.
+4702|Use /compact to compress the conversation, or
+4815|🔄 Session auto-reset — the conversation exceeded the maximum context size and could not be compressed further.
+4817|Your next message will start a fresh session.
+4928|Your API balance or quota is exhausted. Check your provider dashboard.
+4947|You are being rate-limited. Please wait a moment and try again.
+4949|The API is temporarily overloaded. Please try again shortly.
+4957|Use /compact to compress the conversation, or
+5137|✨ Session reset! Starting fresh.
+5141|✨ New session started!
+6577|❌ Background task {task_id} failed: no provider credentials configured.
+7115|Use `/title My Session` to name your current session,
+7471|🔄 **MCP Servers Reloaded**\n
+7663|⏱ Pastes will auto-delete in 6 hours.
+7701|✗ Could not locate the `hermes` command.
+7704|Try running `hermes update` manually in your terminal.
+7882|❌ Hermes update failed (exit code {}).
+7943|or type your answer directly.
+8037|✅ Hermes update finished successfully.
+8039|❌ Hermes update failed. Check the gateway logs or run `hermes update` manually for details.
+8958|⚠️ Proxy mode requires aiohttp. Install with: pip install aiohttp
+10082|⚠️ **Dangerous command requires approval:**\n
+10509|⚠️ No activity for {_elapsed_warn} min.
