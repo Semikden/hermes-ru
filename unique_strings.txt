@@ -1,0 +1,171 @@
+The **{…}** skill is installed but disabled.
+The **{…}** skill is available but not installed.
+⏳ Gateway {…} — queued for the next turn after it comes back.
+⏳ Gateway is {…} and is not accepting another turn right now.
+⏳ Queued for the next turn{…}. I'll respond once the current task finishes.
+⚡ Interrupting current task{…}. I'll respond to your message shortly.
+Your current task will be interrupted. Send any message after restart and I'll try to resume where you left off.
+Your current task will be interrupted.
+Hi~ I don't recognize you yet!
+Too many pairing requests right now~ Please try again later!
+✗ Failed to send response to update process: {…}
+✓ Sent `{…}` to the update process.
+Queued for the next turn.
+Agent still starting — /steer queued for the next turn.
+⚠️ Steer failed: {…}
+⏩ Steer queued — arrives after the next tool call: '{…}'
+Steer rejected (empty payload).
+No active agent — /steer queued for the next turn.
+Agent is running — wait or /stop first, then switch models.
+⏳ Agent is running — `/{…}` can't run mid-turn. Wait for the current response or `/stop` first.
+⚡ Force-stopped. The agent was still starting — session unlocked.
+Command `/{…}` was blocked by a hook.
+⏳ Gateway is {…} and is not accepting new work right now.
+Command returned no output.
+Quick command timed out (30s).
+Quick command error: {…}
+Quick command '/{…}' has no command defined.
+Quick command '/{…}' has no target defined.
+Quick command '/{…}' has unsupported type (supported: 'exec', 'alias').
+The **{…}** skill is disabled for {…}.
+Unknown command `/{…}`. Type /commands to see what's available, or resend without the leading slash to send it as a plain message.
+🎤 I received your voice message but can't transcribe it — no speech-to-text provider is configured.
+Context injection refused.
+📬 No home channel is set for {…}. A home channel is where Hermes delivers cron jobs and other background notifications.
+⚠️ The model returned no response after processing tool results. This can happen if the model response was empty or truncated.
+⚠️ Session too large for the model's context window.
+The request failed: {…}
+ Your API balance or quota is exhausted. Check your provider dashboard.
+ Your plan's usage limit has been reached. It resets in ~{…}h.
+ Your plan's usage limit has been reached. Please wait until it resets.
+ You are being rate-limited. Please wait a moment and try again.
+ The API is temporarily overloaded. Please try again shortly.
+ The request was rejected by the API.
+Sorry, I encountered an error ({…}).
+Try again or use /reset to start a fresh session.
+✨ Session reset! Let's start over.
+✨ New session started!
+👤 **Profile:** `{…}`
+📂 **Home:** `{…}`
+📊 **Hermes Gateway Status**
+**Session ID:** `{…}`
+🤖 **Active Agents & Tasks**
+**Active agents:** {…}
+⚡ Stopped. The agent hadn't started yet — you can continue this session.
+⚡ Stopped. You can continue this session.
+No active task to stop.
+⏳ Gateway restart already in progress...
+⏳ Draining {…} active agent(s) before restart...
+♻ Restarting gateway. If you aren't notified within 60 seconds, restart from the dashboard.
+📖 **Hermes Commands**
+No commands available.
+📚 **Commands** ({…} total, page {…}/{…})
+Current: `{…}` on {…}
+Model switched to `{…}`
+No personalities configured in `{…}/config.yaml`
+🎭 **Available Personalities**
+⚠️ Failed to save personality change: {…}
+🎭 Personality cleared — using base agent behavior.
+🎭 Personality set to **{…}**
+Unknown personality: `{…}`
+No previous message to retry.
+Nothing to undo.
+Failed to save home channel: {…}
+✅ Home channel set to **{…}** (ID: {…}).
+Voice mode enabled.
+Voice mode disabled. Text-only replies.
+Auto-TTS enabled.
+Voice channel: #{…}
+Voice mode: {…}
+Voice mode disabled.
+Voice channels are not supported on this platform.
+This command only works in a Discord server.
+You need to be in a voice channel first.
+Voice dependencies are missing (PyNaCl / davey). Install with: `{…} -m pip install hermes-voice`.
+Failed to join voice channel: {…}
+Joined voice channel **{…}**.
+Failed to join voice channel. Check bot permissions (Connect + Speak).
+Not in a voice channel.
+Left voice channel.
+**[Voice]** <@{…}>: {…}
+Checkpoints are not enabled.
+No checkpoints found for {…}
+Invalid checkpoint number. Use 1-{…}.
+✅ Restored to checkpoint {…}: {…}
+Usage: /background <prompt>
+🔄 Background task started: "{…}"
+❌ Background task {…} failed: provider credentials are not configured.
+✅ Background task complete
+❌ Background task {…} failed: {…}.
+🧠 **Reasoning Settings**
+🧠 ✓ Reasoning display: **ON**
+🧠 ✓ Reasoning display: **OFF** for **{…}**
+⚠️ `/reasoning reset --global` is not supported. Use `/reasoning <level> --global` instead.
+🧠 ✓ Session reasoning override cleared; falling back to global config.
+⚠️ Unknown argument: `{…}`
+🧠 ✓ Reasoning effort set to `{…}` (saved to config)
+🧠 ✓ Reasoning effort set to `{…}` (session only — config save failed)
+🧠 ✓ Reasoning effort set to `{…}` (session only — add `--global` to persist)
+⚡ /fast is only available for OpenAI models that support Priority Processing.
+⚡ Priority Processing
+⚡ ✓ Priority Processing: **{…}** (saved to config)
+⚡ ✓ Priority Processing: **{…}** (this session only)
+⚠️ YOLO mode **OFF** for this session — dangerous commands will require approval.
+⚡ YOLO mode **ON** for this session — all commands auto-approved. Use with caution.
+The `/verbose` command is not enabled for messaging platforms.
+⚙️ Tool progress: **OFF** — no tool activity shown.
+⚙️ Tool progress: **NEW** — shown when tool changes (preview length: `display.tool_max_length`).
+⚙️ Tool progress: **ALL** — every tool call shown (preview length: `display.tool_max_length`).
+⚙️ Tool progress: **VERBOSE** — every tool call with full arguments.
+Not enough conversation to compress (need at least 4 messages).
+No provider configured -- cannot compress.
+Nothing to compress yet (the transcript is still all protected context).
+Compression failed: {…}
+Session database not available.
+⚠️ Title is empty after cleanup. Please use printable characters.
+✏️ Session title set: **{…}**
+Session not found in database.
+📌 Session: `{…}`
+No named sessions found.
+📋 **Named Sessions**
+Could not list sessions: {…}.
+No session found matching '**{…}**'.
+📌 Already on session **{…}**.
+Failed to switch session.
+No conversation to branch — send a message first.
+Failed to create branch: {…}.
+Branch created but failed to switch to it.
+📊 **Session Info**
+Estimated context: ~{…} tokens
+No usage data available for this session.
+Invalid --days value: {…}
+Error generating insights: {…}.
+🔄 **MCP Servers Restarted**
+❌ MCP reload failed: {…}.
+⚠️ Approval expired (agent is no longer waiting). Ask the agent to try again.
+No pending command to approve.
+✅ Command{…} approved{…}{…}. The agent is resuming...
+❌ Command denied (approval was stale).
+No pending command to deny.
+❌ Command{…} denied{…}.
+✗ Failed to upload debug report: {…}.
+**Debug report uploaded:**
+✗ /update is only available from messaging platforms. Run `hermes update` from the CLI instead.
+✗ Not a git repository — cannot update.
+✗ Could not locate the `hermes` command. Hermes is running, but the update command must be run from the CLI.
+✗ Failed to start update: {…}.
+⚕ Starting Hermes update… I'll stream progress here.
+✅ Hermes update finished.
+⚕ **Update needs your input:**
+❌ Hermes update timed out after 30 minutes.
+❌ Hermes update failed.
+♻ Gateway restarted successfully. Your session continues.
+Describe everything visible in this image in thorough detail. Include any text, icons, layout, and colors described accurately.
+ You have a skill called hermes-agent-setup that can help users configure Hermes.
+⚠️ Proxy URL not configured (GATEWAY_PROXY_URL or gateway.proxy_url)
+⚠️ Proxy error ({…}): {…}
+⚠️ Proxy connection error: {…}
+⚠️ Provider authentication failed: {…}
+⏳ Still working... ({…} min elapsed{…})
+⚠️ No activity for {…} min. If the agent does not respond soon, it will be timed out.
+⏱️ Agent inactive for {…} min — no tool calls or API responses.
