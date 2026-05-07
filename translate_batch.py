@@ -8,10 +8,11 @@ import json
 import re
 import sys
 import time
+import os
 from pathlib import Path
 from typing import List, Tuple
 
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Free models in preferred order
@@ -62,32 +63,19 @@ RULES:
 - Keep emoji at the start of messages EXACTLY as-is
 - Keep {skill_name} style placeholders, only translate surrounding text
 - Keep `backtick` formatting for commands, code, variables
-- Keep sentence structure natural in Russian
-- Keep /command names exactly as-is
+- Keep [link](url) markdown intact
+- Output valid JSON only: {"string": "translation"}
+"""
 
-Translate ONLY the human-readable text, not placeholders or formatting markers.
-
-Respond with valid JSON: {"translations": [{"en": "...", "ru": "..."}, ...]}
-
-Do not add quotes inside translated strings that would break JSON."""
-
-    user_prompt = json.dumps({"strings": strings}, ensure_ascii=False)
-
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://hermes.local",
-        "X-Title": "Hermes RU Translator",
-    }
+    user_prompt = "\n".join(f'"{s}": ""' for s in strings)
 
     payload = {
         "model": model,
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
+            {"role": "user", "content": f"Translate to Russian:\n{user_prompt}"},
         ],
         "temperature": 0.3,
-        "max_tokens": 4000,
     }
 
     for attempt in range(MAX_RETRIES):
@@ -96,88 +84,75 @@ Do not add quotes inside translated strings that would break JSON."""
             req = urllib.request.Request(
                 OPENROUTER_URL,
                 data=json.dumps(payload).encode("utf-8"),
-                headers=headers,
+                headers={
+                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": "https://hermes-ru",
+                    "X-Title": "Hermes RU Translator",
+                },
                 method="POST",
             )
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-                content = data["choices"][0]["message"]["content"]
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                result = json.loads(resp.read())
+                content = result["choices"][0]["message"]["content"]
 
-                # Try to extract JSON
-                # Sometimes model wraps in ```json ... ```
-                match = re.search(r"\{[\s\S]*\}", content)
-                if match:
-                    parsed = json.loads(match.group())
-                    return parsed.get("translations", [])
-                parsed = json.loads(content)
-                return parsed.get("translations", [])
-
+                # Parse JSON
+                start = content.find("{")
+                end = content.rfind("}") + 1
+                if start != -1 and end != 0:
+                    return json.loads(content[start:end])
+                print(f"   ⚠️ No JSON in response, got: {content[:200]}")
+                return {}
         except Exception as e:
-            print(f"  ⚠️  Attempt {attempt+1} failed: {e}")
+            print(f"   ⚠️ Attempt {attempt+1}/{MAX_RETRIES} failed: {e}")
             if attempt < MAX_RETRIES - 1:
-                time.sleep(RETRY_DELAY * (attempt + 1))
-            else:
-                return []
+                time.sleep(RETRY_DELAY)
+    return {}
 
 
 def main():
-    strings = load_strings()
-    if not strings:
-        print("No strings to translate. Create unique_strings.txt")
+    if not OPENROUTER_API_KEY:
+        print("❌ OPENROUTER_API_KEY not set")
         sys.exit(1)
 
-    translations = load_translations()
-    already_done = set(translations.keys())
+    strings = load_strings()
+    if not strings:
+        print("❌ No strings to translate")
+        sys.exit(1)
 
-    # Filter out already translated
-    to_translate = [s for s in strings if s not in already_done]
-    print(f"Total strings: {len(strings)}")
-    print(f"Already done: {len(already_done)}")
-    print(f"To translate: {len(to_translate)}")
+    print(f"📊 Loaded {len(strings)} strings")
 
-    if not to_translate:
-        print("All done!")
-        return
+    existing = load_translations()
+    done = set(existing.keys())
+    remaining = [s for s in strings if s not in done]
+    print(f"📊 {len(done)} already translated, {len(remaining)} to go")
 
-    # Process in batches
-    batches = [to_translate[i:i+BATCH_SIZE] for i in range(0, len(to_translate), BATCH_SIZE)]
-    print(f"Batches: {len(batches)}")
+    results = dict(existing)
+    current_model = 0
 
-    for batch_idx, batch in enumerate(batches):
-        print(f"\n📦 Batch {batch_idx+1}/{len(batches)} ({len(batch)} strings)")
+    for i in range(0, len(remaining), BATCH_SIZE):
+        batch = remaining[i : i + BATCH_SIZE]
+        batch_num = i // BATCH_SIZE + 1
+        total_batches = (len(remaining) + BATCH_SIZE - 1) // BATCH_SIZE
 
-        result = None
-        used_model = None
-        for model in FREE_MODELS:
-            print(f"  🤖 Trying {model}...")
-            result = translate_batch(batch, model)
-            if result:
-                used_model = model
+        # Try current model, fallback to next
+        for offset in range(len(FREE_MODELS)):
+            model = FREE_MODELS[(current_model + offset) % len(FREE_MODELS)]
+            print(f"\n📡 Batch {batch_num}/{total_batches} via {model}...")
+            batch_results = translate_batch(batch, model)
+            if batch_results:
+                results.update(batch_results)
+                save_translations(results)
+                print(f"   ✅ {len(batch_results)} translated ({len(results)} total)")
+                current_model = (current_model + offset) % len(FREE_MODELS)
                 break
-            print(f"  ⚠️  {model} failed, trying next...")
-            time.sleep(5)
+            print(f"   ⚠️ {model} failed, trying next...")
+            time.sleep(RETRY_DELAY)
+        else:
+            print(f"   ❌ All models failed for batch {batch_num}")
 
-        if not result:
-            print(f"  ❌ All models failed for this batch!")
-            continue
-
-        print(f"  ✅ Got {len(result)} translations via {used_model}")
-
-        for item in result:
-            en = item.get("en", "")
-            ru = item.get("ru", "")
-            if en and ru:
-                translations[en] = ru
-
-        save_translations(translations)
-        print(f"  💾 Saved {len(translations)} total translations")
-
-        # Rate limit between batches
-        if batch_idx < len(batches) - 1:
-            time.sleep(3)
-
-    print(f"\n✅ Done! {len(translations)} strings translated")
-    print(f"📁 Output: {OUTPUT_FILE}")
+    print(f"\n✅ Done: {len(results)}/{len(strings)} strings translated")
+    save_translations(results)
 
 
 if __name__ == "__main__":
